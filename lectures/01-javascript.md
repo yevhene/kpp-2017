@@ -1,3 +1,7 @@
+# Основи
+
+## Мова JavaScript
+
 1. statements
     - `;`
 2. simple data types
@@ -75,3 +79,8 @@
 15. OOP
     - `this`
     - prototype
+16. Basic Promises
+    - `new Promise(resolve, reject)`
+    - `then`/`catch`
+
+## Формат JSON
