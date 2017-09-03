@@ -57,3 +57,7 @@
   - `getCurrentPosition`
   - `watchPosition`
   - `clearWatch`
+
+## Література та посилання
+- [MDN (укр.)](https://developer.mozilla.org/uk/)
+- [w3schools (en.)](https://www.w3schools.com/)

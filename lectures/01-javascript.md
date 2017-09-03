@@ -84,3 +84,6 @@
     - `then`/`catch`
 
 ## Формат JSON
+
+## Література та посилання
+- [w3schools (en.)](https://www.w3schools.com/js/default.asp)
