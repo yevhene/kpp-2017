@@ -76,8 +76,37 @@
     Content-Encoding: gzip
     ```
 
-## Інтеграція з API
-
 ## Стратегії автентификації (token, OAuth2)
+1. token
+    - process
+      - one step
+      - two step
+    - transfer
+      - header
+      - url
+2. oauth2
+    - predecestors
+      - OpenID
+      - oauth
+    - actors
+      - client (website)
+      - user (you)
+      - provider (public well-known website)
+    - scope
+    - process
+      - request
+        - redirect_uri
+        - state (check)
+      - redirect on redirect_uri
+        - state (check)
+        - code (transaction id)
+      - request token
+        - client_id
+        - client_secret
+        - code (transaction id)
+        - redirect_uri (from first step)
+      - refresh_token
 
-
+## Приклади
+- https://newsapi.org
+- http://openweathermap.org/api
