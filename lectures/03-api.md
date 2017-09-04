@@ -1,4 +1,4 @@
-# API - Application Programming Interface
+# 3. API - Application Programming Interface
 
 ## HTTP - HyperText Transfer Protocol
 1. prerequsites
@@ -76,11 +76,11 @@
     Content-Encoding: gzip
     ```
 
-## Стратегії автентификації (token, OAuth2)
-1. token
+## Стратегії автентификації та авторизації (token, OAuth2)
+1. apiKey
     - process
-      - one step
-      - two step
+      - simple
+      - two-step using auth token
     - transfer
       - header
       - url
@@ -108,5 +108,4 @@
       - refresh_token
 
 ## Приклади
-- https://newsapi.org
-- http://openweathermap.org/api
+- https://github.com/toddmotto/public-apis
