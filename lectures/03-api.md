@@ -7,6 +7,8 @@
     - port
 
 2. request
+    - url
+      - encoding
     - method
       - explicit
         - GET
