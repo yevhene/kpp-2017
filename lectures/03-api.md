@@ -78,6 +78,11 @@
     Content-Encoding: gzip
     ```
 
+## Формати даних
+### JSON
+### XML
+### Other
+
 ## Стратегії автентификації та авторизації (token, OAuth2)
 1. apiKey
     - process

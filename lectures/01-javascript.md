@@ -108,7 +108,24 @@ var a = 4;
 10. object
     - `.`
     - `[]`
-11. type coercion
+11. conditionals
+    - `if`
+    - `if..else`
+    - `swtich..case`
+12. loops
+    - `while`
+    - `do..while`
+    - `for`
+    - `break`
+    - `continue`
+13. function
+    - arguments
+    - body
+    - as data
+    - scope
+    - hoisting
+    - closure
+14. type coercion
     - falsey
       - `""` (empty string)
       - `0`, `-0`, `NaN` (no a number)
@@ -116,31 +133,7 @@ var a = 4;
       - `false`
     - arrays
     - non commutative
-12. conditionals
-    - `if`
-    - `if..else`
-    - `swtich..case`
-13. loops
-    - `while`
-    - `do..while`
-    - `for`
-    - `break`
-    - `continue`
-14. function
-    - arguments
-    - body
-    - as data
-    - scope
-    - hoisting
-    - closure
-15. OOP
-    - `this`
-    - prototype
-16. Basic Promises
-    - `new Promise(resolve, reject)`
-    - `then`/`catch`
-
-## Формат JSON
+    - null >= 0
 
 ## Література та посилання
 - [w3schools (en.)](https://www.w3schools.com/js/default.asp)
