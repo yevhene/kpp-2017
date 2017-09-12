@@ -66,15 +66,15 @@ fetch('./api/some.json')
 
 Поточна погода в місті:
 
-`https://api.openweathermap.org/data/2.5/weather?q=Vinnytsia&appid=1b5ee5a11b5ee5a11b5ee5a1aaa`
+`https://api.openweathermap.org/data/2.5/weather?q=Vinnytsia&appid=1b5ee5a1a74d624a74750350327ea372`
 
 Поточна погода в місті, з уточненням країни:
 
-`https://api.openweathermap.org/data/2.5/weather?q=Vinnytsia,ua&appid=1b5ee5a11b5ee5a11b5ee5a1aaa`
+`https://api.openweathermap.org/data/2.5/weather?q=Vinnytsia,ua&appid=1b5ee5a1a74d624a74750350327ea372`
 
 Поточна погода в місці з координатами lat (широта) і lon (довгота):
 
-`https://api.openweathermap.org/data/2.5/weather?lat=49.23&lon=28.48&appid=1b5ee5a1a1b5ee5a11b5ee5a1aa`
+`https://api.openweathermap.org/data/2.5/weather?lat=49.23&lon=28.48&appid=1b5ee5a1a74d624a74750350327ea372`
 
 #### Посилання на отримання іконки погоди *[Джерело](https://openweathermap.org/weather-conditions)*
 
