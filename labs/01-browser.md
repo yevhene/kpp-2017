@@ -1,24 +1,23 @@
-# Лабораторна 1: Розробка браузерного додатку
+# Лабораторна 1: Розробка браузерної аплікації
 
 ## Основні положення
 
 ### Мета
 - Основи JavaScript
-- Інтеграція зі сторонніми сервісами
+- JavaScript HTML5 API
+- Інтеграція зі сторонніми API
 
 ### Завдання
-Розробити статичний браузерний додаток, що отримує дані з відкритого API, та відображає їх на мапі.
+Розробити статичний браузерну аплікацію, що отримує дані з відкритого API, та відображає їх на мапі.
 
 ### [Приклад](https://kpp-lab-1.herokuapp.com/)
 
-## Матеріали
+## Мапи
 
-### Google maps
+### Google maps *[Документація](https://developers.google.com/maps/documentation/javascript/?hl=ru)*
 **Для використання Google Maps необхідно зареєструватися та отримати ключ до API. Це можна зробити на будь-якій сторінці документації.**
 
-#### [Документація](https://developers.google.com/maps/documentation/javascript/?hl=ru)
-
-#### Інтеграція з Google Maps
+#### Інтеграція з Google Maps *[Джерело](https://developers.google.com/maps/documentation/javascript/examples/map-simple?hl=ru)*
 ```html
 <div id="map"></div>
 <script>
@@ -33,9 +32,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
 async defer></script>
 ```
-[Джерело](https://developers.google.com/maps/documentation/javascript/examples/map-simple?hl=ru)
 
-#### Створення маркера на мапі
+#### Створення маркера на мапі *[Джерело](https://developers.google.com/maps/documentation/javascript/examples/marker-simple?hl=ru)*
 ```javascript
 var marker = new google.maps.Marker({
   position: myLatLng,
@@ -43,13 +41,12 @@ var marker = new google.maps.Marker({
   title: 'Hello World!'
 });
 ```
-[Джерело](https://developers.google.com/maps/documentation/javascript/examples/marker-simple?hl=ru)
 
-### Завантаження даних зі стороннього ресурсу
+## Завантаження даних зі стороннього ресурсу
 
-#### [Документація](https://developer.mozilla.org/ru/docs/Web/API/Fetch_API/Using_Fetch)
+### fetch *[Документація](https://developer.mozilla.org/ru/docs/Web/API/Fetch_API/Using_Fetch)*
 
-#### Приклад
+#### Приклад *[Джерело](https://habrahabr.ru/post/252941/)*
 ```javascript
 fetch('./api/some.json')
   .then(function(response) {
@@ -58,11 +55,72 @@ fetch('./api/some.json')
     });
   });
 ```
-[Джерело](https://habrahabr.ru/post/252941/)
 
-### Сторонні API
+## Сторонні API *[Список](https://github.com/toddmotto/public-apis)*
 
-#### [Список](https://github.com/toddmotto/public-apis)
+### Приклад: Online Weather *[Документація](http://openweathermap.org)*
 
-#### Приклади
-- Погода [Online Weather](http://openweathermap.org/current)
+#### Точки доступну до поточної погоди *[Джерело](http://openweathermap.org/current)*
+
+*Кожний URL вимагає параметр `appid` в який має бути переданий ключ. Ключ можна отримати зареєстревавшись на ресурсі.*
+
+Поточна погода в місті:
+
+`https://api.openweathermap.org/data/2.5/weather?q=Vinnytsia&appid=1b5ee5a11b5ee5a11b5ee5a1aaa`
+
+Поточна погода в місті, з уточненням країни:
+
+`https://api.openweathermap.org/data/2.5/weather?q=Vinnytsia,ua&appid=1b5ee5a11b5ee5a11b5ee5a1aaa`
+
+Поточна погода в місці з координатами lat (широта) і lon (довгота):
+
+`https://api.openweathermap.org/data/2.5/weather?lat=49.23&lon=28.48&appid=1b5ee5a1a1b5ee5a11b5ee5a1aa`
+
+#### Посилання на отримання іконки погоди *[Джерело](https://openweathermap.org/weather-conditions)*
+
+*Необхідно замінити параметр $weather на код погоди*
+
+`http://openweathermap.org/img/w/$weather.png`
+
+#### Інтерпретація відповіді сервера *[Джерело](https://openweathermap.org/current#current_JSON)*
+```javascript
+{
+  "coord": {                            // + Координати точки
+    "lon": 28.48,                       // - Широта
+    "lat": 49.23                        // - Довгота
+  },
+  "weather": [{                         // + Список реузльтатів
+    "id": 802,                          // - Ідентифікатор погодних умов
+    "main": "Clouds",                   // - Категорія погодних умов
+    "description": "scattered clouds",  // - Підкатегорія погодних умов
+    "icon": "03d"                       // - Код іконки
+  }],
+  "base": "stations",                   // + (не використовується)
+  "main": {                             // + Основні параметри
+    "temp": 291.78,                     // - Температура
+    "pressure": 985.85,                 // - Тиск
+    "humidity": 80,                     // - Вологість
+    "temp_min": 291.78,                 // - Мінімальна температура
+    "temp_max": 291.78,                 // - Максимальна температура
+    "sea_level": 1018.82,               // - Тиск на рівні моря
+    "grnd_level": 985.85                // - Тиск на рівні землі
+  },
+  "wind": {                             // + Вітер
+    "speed": 6.11,                      // - Швидкість
+    "deg": 147.501                      // - Напрямок
+  },
+  "clouds": {                           // + Хмарність
+    "all": 44                           // - Процент закритого неба
+  },
+  "dt": 1505200551,                     // + Час (UNIX Time)
+  "sys": {                              // + Загальна інформація
+    "message": 0.003,                   // - (не використовується)
+    "country": "UA",                    // - Країна
+    "sunrise": 1505187511,              // - Час сходу (UNIX Time)
+    "sunset": 1505233498                // - Час заходу (UNIX Time)
+  },
+  "id": 689558,                         // + Ідентифікатор міста
+  "name": "Vinnytsya",                  // + Назва міста
+  "cod": 200                            // + (не використовується)
+}
+```
