@@ -1,6 +1,7 @@
 {
   "name": "kpp",
   "version": "1.0.0",
+  "description": "KPP",
   "main": "app.js",
   "repository": "git@github.com:yevhene/kpp.git",
   "author": "Yevhen Shemet <yevhene@gmail.com>",
@@ -11,7 +12,8 @@
     "ejs": "^2.5.7",
     "express": "~4.14.0",
 
-    "slides": "./slides"
+    "slides": "./slides",
+    "labs": "./labs"
   },
   "license": "MIT"
 }

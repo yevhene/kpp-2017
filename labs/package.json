@@ -1,0 +1,11 @@
+{
+  "name": "kpp-labs",
+  "version": "1.0.0",
+  "description": "KPP Labs",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~4.14.0",
+
+    "01-browser": "./labs/01-browser"
+  }
+}

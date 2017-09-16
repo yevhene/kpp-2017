@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <title>KPP Lab 1</title>
+    <style>
+      html, body, #map {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var baseSource = 'https://api.openweathermap.org/data/2.5/weather?APIKEY=1b5ee5a1a74d624a74750350327ea372';
+      var points = [{
+        title: 'Vinnytsia',
+        position: {
+          lat: 49.233333,
+          lng: 28.483333
+        }
+      }, {
+        title: 'Lviv',
+        position: {
+          lat: 49.83,
+          lng: 24.014167
+        }
+      }, {
+        title: 'Kharkiv',
+        position: {
+          lat: 50.004444,
+          lng: 36.231389
+        }
+      }, {
+        title: 'Kyiv',
+        position: {
+          lat: 50.45,
+          lng: 30.523333
+        }
+      }, {
+        title: 'Odesa',
+        position: {
+          lat: 46.485722,
+          lng: 30.743444
+        }
+      }];
+
+      var map;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 48.7195052, lng: 30.2470346},
+          zoom: 7
+        });
+
+        for (var i = 0, len = points.length; i< len; ++i) {
+          setMarker(points[i]);
+        }
+      }
+
+      function setMarker(point) {
+        var url = baseSource + '&lat=' + point.position.lat + '&lon=' + point.position.lng;
+        fetch(url)
+          .then(function(response) {
+            return response.json();
+          })
+          .then(function(data) {
+            if (data && data.weather && data.weather.length > 0) {
+              var weather = data.weather[0];
+              var icon = 'https://openweathermap.org/img/w/' + weather.icon + '.png';
+              var marker = new google.maps.Marker({
+                position: point.position,
+                map: map,
+                title: weather.description,
+                icon: icon
+              });
+            }
+          });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLFy-QALEmBPzIJMsWynAcdRUqB7VtXU4&callback=initMap" async defer></script>
+  </body>
+</html>
