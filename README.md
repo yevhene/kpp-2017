@@ -13,7 +13,7 @@
       - JavaScript HTML5 API
     - Матеріали:
       - [План](lectures/02-browser.md)
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/01-browser)
+      - [Слайди](https://vntu-kpp.herokuapp.com/slides/02-browser)
 3. [API]
     - Теми:
       - HTTP

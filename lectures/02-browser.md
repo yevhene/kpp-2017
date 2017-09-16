@@ -83,4 +83,4 @@
 ## Література та посилання
 - [MDN (укр.)](https://developer.mozilla.org/uk/)
 - [w3schools (en.)](https://www.w3schools.com/)
-- [CSS Selectors(en.)]https://www.w3schools.com/cssref/css_selectors.asp
+- [CSS Selectors (en.)](https://www.w3schools.com/cssref/css_selectors.asp)
