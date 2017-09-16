@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <style>
+      html, body {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input type="text" />
+      <input type="checkbox" />
+      <input type="radio" />
+      <input type="time" />
+      <input type="submit" />
+
+      <select>
+        <option>Вибір 1</option>
+        <option>Вибір 2</option>
+      </select>
+
+      <button>Hello</button>
+      <script>
+        function fn(event, element) {
+          console.log(event);
+          console.log(element);
+        }
+      </script>
+<button onclick="fn(event, this)">Hello</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <style>
+      html, body {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function process(event) {
+        console.log(event);
+      }
+      function changed(element) {
+        console.log(element.value);
+        return false;
+      }
+    </script>
+    <form onsubmit="process(event)">
+      <input type="text" onkeydown="return changed(this)" />
+      <input type="submit" />
+    </form>
+    <button onclick="alert('Hello')">Hello</button>
+  </body>
+</html>

@@ -1,0 +1,413 @@
+<section>
+  <h1>Браузерне оточення</h1>
+  <h2>Лекція 2</h2>
+</section>
+
+<section>
+  <h2>HTML</h2>
+
+  <section>
+    <h3>Структура</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;html&gt;
+    &lt;head&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Теги block</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;div&gt;Блочний зміст&lt;/div&gt;
+
+  &lt;h1&gt;Заголовок&lt;/h1&gt;
+  &lt;h6&gt;Маленький заголовок&lt;/h6&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Список 1&lt;/li&gt;
+  &lt;/ul&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Теги block (в дії)</h3>
+
+    <iframe src="examples/html-block.html"></iframe>
+  </section>
+
+  <section>
+    <h3>Аттрибути</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;div id="main"&gt;
+    &lt;div class="content"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Теги inline</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  ...текст...&lt;span&gt;Блочний зміст&lt;/span&gt;...текст...
+
+  &lt;b&gt;Виділений текст (але не обов'язково жирний)&lt;/b&gt;
+  &lt;i&gt;По іншому виділений текст (але не обов'язково курсив)&lt;/i&gt;
+  &lt;a href="http://example.com"&gt;Посилання&lt;/a&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Теги inline (в дії)</h3>
+
+    <iframe src="examples/html-inline.html"></iframe>
+  </section>
+
+  <section>
+    <h3>Теги inline-block</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;img src="http://example.com/image.png" alt="Картинка" /&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Теги inline-block (в дії)</h3>
+
+    <iframe src="examples/html-inline-block.html"></iframe>
+  </section>
+
+  <section>
+    <h3>Форми</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;form&gt;
+    &lt;input type="text" /&gt;
+    &lt;input type="checkbox" /&gt;
+    &lt;input type="radio" /&gt;
+    &lt;input type="time" /&gt;
+    &lt;input type="submit" /&gt;
+
+    &lt;select&gt;
+      &lt;option&gt;Вибір 1&lt;/option&gt;
+      &lt;option&gt;Вибір 2&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;button&gt;Hello&lt;/button&gt;
+  &lt;/form&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Форми (в дії)</h3>
+
+    <iframe src="examples/html-forms.html"></iframe>
+  </section>
+
+  <section>
+    <h3>Події</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;script&gt;
+    function process(event) {
+      console.log(event);
+    }
+    function changed(element) {
+      console.log(element.value);
+      return false;
+    }
+  &lt;/script&gt;
+  &lt;form onsubmit="process(event)"&gt;
+    &lt;input type="text" onkeydown="return changed(this)" /&gt;
+    &lt;input type="submit" /&gt;
+  &lt;/form&gt;
+  &lt;button onclick="alert('Hello')"&gt;Hello&lt;/button&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Події (в дії)</h3>
+
+    <iframe src="examples/html-events.html"></iframe>
+  </section>
+
+  <section>
+    <h3>script</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;script async defer src="js/script.js"&gt;&lt;/script&gt;
+    </code></pre>
+  </section>
+</section>
+<section>
+  <h1>CSS</h1>
+
+  <section>
+    <h3>Правила (Декларації)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;style&gt;
+    span {
+      background-color: red;
+    }
+    h1 {
+      color: #00ff00;
+    }
+  &lt;/style&gt;
+
+  &lt;h1&gt;Hello &lt;span&gt;CSS&lt;/span&gt;!&lt;/h1&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Правила (в дії)</h3>
+
+    <iframe src="examples/css-rules.html"></iframe>
+  </section>
+
+  <section>
+    <h3>Селектори</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;style&gt;
+    #title { color: green; }
+    .text {
+      color: blue;
+      background-color: red;
+    }
+    .description .text { color: white; }
+  &lt;/style&gt;
+  &lt;h1 id="title"&gt;Hi! My name is (what?)&lt;/h1&gt;
+  &lt;h2 class="text"&gt;Hi my name is (who?)&lt;/h2&gt;
+  &lt;div class="description"&gt;
+    &lt;div class="text"&gt;My name is Yevhen Shemet&lt;/div&gt;
+  &lt;/div&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Селектори (в дії)</h3>
+
+    <iframe src="examples/css-selectors.html"></iframe>
+  </section>
+
+  <section>
+    <h3>link</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;link href="css/style.css" rel="stylesheet" /&gt;
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h1>JavaScript</h1>
+
+  <section>
+    <h3>OOP</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  function Dog(name) {
+    this.name = name;
+    this.age = 0;
+  }
+
+  Dog.prototype.bark = function() {
+    alert(this.name + ' gav');
+  }
+
+  var myDog = new Dog('Barsik');
+  myDog.bark();
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Timeout/Interval</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  setTimeout(function() {
+    alert('Hello');
+  }, 1000);
+
+  var interval = setInterval(function() {
+    alert('World');
+  }, 5000);
+
+  clearInterval(interval);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Promises simple</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  db.getUser({ id: 1 })
+    .then(function(user) {
+      console.log(user.name);
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Promises medium</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  db.getUser({ id: 1 })
+    .then(function(user) {
+      return db.getCar({ id: user.car.id })
+    })
+    .then(function(car) {
+      console.log(car.number);
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Promises hard</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  db.getUser({ id: 1 })
+    .then(function(user) {
+      return Promise.all(
+        db.getCar({ id: user.car.id }),
+        db.getAddress({ id: user.address.id })
+      );
+    })
+    .then(function(results) {
+      var car = results[0];
+      var address = results[1];
+      console.log(car.number, address.street);
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Own Promise</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve('Hello');
+    }, 1000);
+  })
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>JSON</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  JSON.parse('{"name": "student"}')
+
+  JSON.stringify({ street: 'Khmelnytsky Highway', house: 95 })
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h1>HTML5 API</h1>
+
+  <section>
+    <h3>DOM</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  <ul id="students" class="list">
+    <li class="good">Ivanov</li>
+    <li class="good">Petrov</li>
+    <li class="ok">Sidorov</li>
+  </ul>
+  <ol id="cars" class="list">
+    <li class="good">BMW</li>
+    <li class="ok">Lada</li>
+  </ol>
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+  document.findElementById('students')
+  document.getElementsByClassName('ok')
+
+  document.querySelector('#students .good')
+  document.querySelectorAll('ul.list .ok')
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>fetch</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  fetch('http://someapi.com', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'appliaction/json'
+    },
+    body: JSON.stringify({ name: 'Yevhen' })
+  })
+  .then(function(response) {
+    console.log(response.status);
+    return response.json()
+  })
+  .then(function(data) {
+    console.log(data);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>FormData</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  &lt;form&gt;
+    &lt;input name="name" type="text" /&gt;
+  &lt;/form&gt;
+            </code></pre>
+
+            <pre><code class="hljs" data-trim contenteditable>
+  var formdata = new FormData(document.querySelector('form'));
+  formdata.get('name');
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>History</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  window.history.back();
+  window.history.forward();
+  window.history.pushState({}, 'MyPage', '/mypage');
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Geolocation</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+  navigator.geolocation.getCurrentPosition(function(p) {
+    newMarker(p.coords.latitude, p.coords.longitude);
+  });
+
+  var watch = navigator.geolocation.watchPosition(function(p) {
+    moveMarker(p.coords.latitude, p.coords.longitude);
+  });
+
+  navigator.geolocation.clearWatch(watch);
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h1>Питання</h1>
+</section>

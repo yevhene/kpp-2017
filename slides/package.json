@@ -1,0 +1,15 @@
+{
+  "name": "kpp-slides",
+  "version": "1.0.0",
+  "description": "KPP Slides",
+  "homepage": "https://kpp-slides.herokuapp.com",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "~4.14.0",
+    "express-ejs-layouts": "^2.3.1"
+  },
+  "license": "MIT"
+}
