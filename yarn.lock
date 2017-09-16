@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"01-browser@./labs/01-browser":
+"01-browser@./apps/examples/01-browser":
   version "1.0.0"
   dependencies:
     express "^4.15.4"
@@ -92,6 +92,12 @@ etag@~1.7.0:
 etag@~1.8.0:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
+
+examples@./apps/examples:
+  version "1.0.0"
+  dependencies:
+    "01-browser" "./apps/examples/01-browser"
+    express "~4.14.0"
 
 express-ejs-layouts@^2.3.1:
   version "2.3.1"
@@ -242,11 +248,9 @@ ipaddr.js@1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.4.0.tgz#296aca878a821816e5b85d0a285a99bcff4582f0"
 
-labs@./labs:
-  version "1.0.0"
-  dependencies:
-    "01-browser" "./labs/01-browser"
-    express "~4.14.0"
+marked@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -401,7 +405,7 @@ setprototypeof@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
 
-slides@./slides:
+slides@./apps/slides:
   version "1.0.0"
   dependencies:
     ejs "^2.5.7"

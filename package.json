@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "express": "~4.14.0",
-
-    "slides": "./slides",
-    "labs": "./labs"
+    "examples": "./apps/examples",
+    "marked": "^0.3.6",
+    "slides": "./apps/slides"
   },
   "license": "MIT"
 }
