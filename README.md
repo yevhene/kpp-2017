@@ -6,28 +6,28 @@
       - Мова JavaScript
       - Формат JSON
     - Матеріали
-      - [Конспект](docs/lectures/01-javascript.md)
+      - [Конспект](lectures/01-javascript.md)
 2. Браузерне оточення
     - Теми:
       - Браузерні технології
       - JavaScript HTML5 API
     - Матеріали:
-      - [План](docs/lectures/02-browser.md)
+      - [План](lectures/02-browser.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/02-browser)
 3. API
     - Теми:
       - HTTP
       - Стратегії автентификації (token, OAuth2)
     - Матеріали:
-      - [План](docs/lectures/03-api.md)
+      - [План](lectures/03-api.md)
 4. Контроль версій
     - Теми:
       - Основи систем контролю версій (git)
       - Хмарні сервіси контролю версій (github)
     - Матеріали:
-      - [План](docs/lectures/04-git.md)
+      - [План](lectures/04-git.md)
 
-[Лабораторна 1: Розробка браузерної аплікації](docs/labs/01-browser)
+[Лабораторна 1: Розробка браузерної аплікації](labs/01-browser.md)
 
 5. Серверне оточення
     - Теми:
