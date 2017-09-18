@@ -4,13 +4,13 @@
     - Теми:
       - Основні поняття Крос-платформного Програмування
       - Мова JavaScript
-      - Формат JSON
     - Матеріали
       - [Конспект](lectures/01-javascript.md)
 2. Браузерне оточення
     - Теми:
       - Браузерні технології
       - JavaScript HTML5 API
+      - Формат JSON
     - Матеріали:
       - [План](lectures/02-browser.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/02-browser)

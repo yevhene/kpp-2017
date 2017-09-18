@@ -42,5 +42,7 @@
     - pull request
     - issues
 
+4. markdown
+
 ## Література та посилання
 - [Pro Git (укр.)](https://git-scm.com/book/uk/v2)
