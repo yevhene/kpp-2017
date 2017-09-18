@@ -20,6 +20,7 @@
       - Стратегії автентификації (token, OAuth2)
     - Матеріали:
       - [План](lectures/03-api.md)
+      - [Слайди](https://vntu-kpp.herokuapp.com/slides/03-api)
 4. Контроль версій
     - Теми:
       - Основи систем контролю версій (git)
@@ -36,7 +37,7 @@
       - Подієва модель (event loop)
 6. Розробка API
     - Теми:
-      - HTTP/REST
+      - REST
       - Фреймворк express.js
       - Розгортування (deploy)
       - Хмарні сервіси (heroku)

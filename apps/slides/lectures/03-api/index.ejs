@@ -1,0 +1,334 @@
+<section>
+  <h1>API</h1>
+  <h2>Лекція 3</h2>
+</section>
+
+<section>
+  <h2>API</h2>
+
+  <section>
+    <h4>Application Programming Interface</h4>
+  </section>
+
+  <section>
+    <h3>Види</h3>
+
+    <ul>
+      <li>Object (JavaScript Math)</li>
+      <li>Library (JQuery)</li>
+      <li>External library (COM, ActiveX)</li>
+      <li>OS System Calls (WIN32, Linux)</li>
+      <li>RPC (CORBA, DCOM, SOAP, .NET WCF)</li>
+      <li>Web (REST, GraphQL)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Object</h3>
+    <h4>JavaScript Math Object</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Math.pow(2, 3)
+    </code></pre>
+
+    <a href="https://developer.mozilla.org/uk/docs/Web/JavaScript/Reference/Global_Objects/Math">Source</a>
+  </section>
+
+  <section>
+    <h3>Library</h3>
+    <h4>JQuery</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+jQuery.ajax('http://example.com')
+    </code></pre>
+
+    <a href="https://api.jquery.com/jQuery.ajax/">Source</a>
+  </section>
+
+  <section>
+    <h3>External library</h3>
+    <h4>COM</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+class CComponent:public IComponent
+{
+public:
+   virtual HRESULT __stdcall QueryInterface(
+       const IID& iid, void** ppv
+   );
+   virtual ULONG __stdcall AddRef(){return 0;}
+   virtual ULONG __stdcall Release(){return 0;}
+
+   virtual void __stdcall Print(const char* msg);
+};
+    </code></pre>
+
+    <a href="https://www.codeproject.com/Articles/6726/COM-from-scratch-PART-ONE">Source</a>
+  </section>
+
+  <section>
+    <h3>OS System Calls</h3>
+    <h4>WIN32</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+int WINAPI MessageBox(
+  _In_opt_ HWND    hWnd,
+  _In_opt_ LPCTSTR lpText,
+  _In_opt_ LPCTSTR lpCaption,
+  _In_     UINT    uType
+);
+    </code></pre>
+
+    <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645505(v=vs.85).aspx">Source</a>
+  </section>
+
+  <section>
+    <h3>RPC</h3>
+    <h4>SOAP</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+     &lt;getProductDetails xmlns="http://warehouse.example.com/ws"&gt;
+       &lt;productID&gt;12345&lt;/productID&gt;
+     &lt;/getProductDetails&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+    </code></pre>
+
+    <a href="https://ru.wikipedia.org/wiki/SOAP">Source</a>
+  </section>
+
+  <section>
+    <h3>Web</h3>
+    <h4>GraphQL</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+type Starship {
+  id: ID!
+  name: String!
+  length(unit: LengthUnit = METER): Float
+}
+    </code></pre>
+
+    <a href="http://graphql.org/learn/schema/">Source</a>
+  </section>
+</section>
+
+<section>
+  <h2>WWW</h2>
+
+  <section>
+    <h4>World Wide Web</h4>
+  </section>
+
+  <section>
+    <h3>TCP/IP</h3>
+    <h4>TCP - Transmission Control Protocol (TCP/UDP)</h4>
+    <h4>IP - Internet protocol</h4>
+  </section>
+
+  <section>
+    <br />
+    <table>
+      <tr><th>TCP/IP</th><th>OSI</th></tr>
+      <tr><td rowspan="3">Application</td><td>Application</td></tr>
+      <tr><td>Presentation</td></tr>
+      <tr><td>Session</td></tr>
+      <tr><td>Transport</td><td>Transport</td></tr>
+      <tr><td>Internet</td><td>Network</td></tr>
+      <tr><td rowspan="2">Link</td><td>Data link</td></tr>
+      <tr><td>Physical</td></tr>
+      <tr><td></td></td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h3>DNS</h3>
+    <h4>Domain Name System</h4>
+  </section>
+
+  <section>
+    <h3>URL</h3>
+    <h4>Uniform Resource Locator</h4>
+
+    <pre><code class="hljs" data-trim contenteditable>
+scheme://user:password@host:port/path?query#fragment
+    </code></pre>
+
+    <h4>Examples:</h4>
+    <pre><code class="hljs" data-trim contenteditable>
+http://vntu.edu.ua
+https://www.google.com.ua/search?q=kittens%26puppies
+ftp://student:qwerty@fileshare.local:12345/pron
+yevhene@vntu.edu.ua
+magnet:?xl=10826029&dn=kino.mkv&xt=urn:sha1:3I42H3...
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>HTTP</h2>
+
+  <section>
+    <h4>Hyper Text Transfer Protocol</h4>
+  </section>
+</section>
+
+<section>
+  <h2>HTTP Request</h2>
+
+  <section>
+    <h3>Method</h3>
+
+    <ul>
+      <li>GET - read</li>
+      <li>POST - create</li>
+      <li>PUT/PATCH - update</li>
+      <li>DELETE - destroy</li>
+      <li>HEAD, OPTIONS, TRACE, CONNECT, ...</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Request-Line</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+GET /slides/03-api HTTP/1.1
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Request Headers (Host)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Host: github.com
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Request Headers (User-Agent)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/60.0.3112.113 Chrome/60.0.3112.113 Safari/537.36
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Request Headers (Accept)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.8
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Request Headers (Referer)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Referer: https://github.com
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Request Headers (Cookie)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Cookie: user_session=gql8cuZ5DQa6Hs; tz=Europe%2FKiev
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Request Headers (Content-Type)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Content-Type: application/json
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Body</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Content-Type: application/x-www-form-urlencoded
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+name=Петро%20Петров&rating=4%2E5
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Body</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Content-Type: multipart/form-data boundary=Asrf456BGe4h
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+--Asrf456BGe4h
+Content-Disposition: form-data; name="name"
+
+Петро Петров
+--Asrf456BGe4h
+Content-Disposition: form-data; name="ava"; filename="petr.jpg"
+Content-Type: image/jpeg
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAApYAAAB6CAIAAACKiYSNAAAAA3NCSVQICAjb4U/gAAAAGXRFWHRT
+b2Z0d2FyZQBnbm9tZS1zY3JlZW5zaG907wO/PgAAIABJREFUeJzt3Xd8HPWVAPC3vTdp1S3Jsi33
+...
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Body</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Content-Type: application/json
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+{
+  "name": "Петро Петров",
+  "rating": 4.5
+}
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>HTTP in Action</h2>
+
+  <section>
+    <pre><code class="hljs" data-trim contenteditable>
+$ telnet vntu.edu.ua 80
+Trying 194.146.141.4...
+Connected to vntu.edu.ua.
+Escape character is '^]'.
+GET /uk/about-university HTTP/1.1
+Host: vntu.edu.ua
+
+HTTP/1.1 200 OK
+Server: nginx/1.13.1
+Date: Mon, 18 Sep 2017 11:27:31 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=20
+X-Powered-By: PHP/5.6.30
+Set-Cookie: a648815f634df34a70b69cc2c348209e=fbh58o0tsb8re1ui28nevh1a66; path=/
+P3P: CP="NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"
+Vary: User-Agent
+Expires: Mon, 1 Jan 2001 00:00:00 GMT
+Last-Modified: Mon, 18 Sep 2017 11:27:31 GMT
+Cache-Control: post-check=0, pre-check=0
+Pragma: no-cache
+
+1e78
+&lt;!DOCTYPE html ....
+    </code></pre>
+  </section>
+</section>

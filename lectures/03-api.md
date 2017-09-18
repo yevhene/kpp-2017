@@ -2,13 +2,11 @@
 
 ## HTTP - HyperText Transfer Protocol
 1. prerequsites
+    - DNS
     - TCP/IP
-    - host (DNS)
-    - port
+    - URL
 
 2. request
-    - url
-      - encoding
     - method
       - explicit
         - GET
