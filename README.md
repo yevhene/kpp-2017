@@ -8,16 +8,17 @@
       - [Конспект](lectures/01-javascript.md)
 2. Браузерне оточення
     - Теми:
-      - Браузерні технології
+      - Браузерні технології (HTML, CSS)
       - JavaScript HTML5 API
-      - Формат JSON
     - Матеріали:
       - [План](lectures/02-browser.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/02-browser)
 3. API
     - Теми:
+      - WWW
       - HTTP
       - Стратегії автентификації (token, OAuth2)
+      - Формати (JSON)
     - Матеріали:
       - [План](lectures/03-api.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/03-api)
