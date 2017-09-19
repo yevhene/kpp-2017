@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "glob": "^7.1.2",
-    "examples": "./apps/examples",
+    "examples": "./examples",
     "express": "~4.14.0",
     "marked": "^0.3.6",
-    "slides": "./apps/slides"
+    "slides": "./slides"
   },
   "license": "MIT"
 }

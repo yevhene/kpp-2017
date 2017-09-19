@@ -12,7 +12,7 @@
     "node": "8.5"
   },
   "dependencies": {
-    "base": "./base"
+    "app": "./app"
   },
   "license": "MIT"
 }

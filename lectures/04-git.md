@@ -34,15 +34,20 @@
     - gitlab
     - bitbucket
 
-2. open source
+2. Tools
+  - https://desktop.github.com/
+  - https://www.gitkraken.com/
+
+3. open source
     - examples
 
-3. workflow
+4. workflow
     - fork
     - pull request
     - issues
 
-4. markdown
+5. markdown
+    - README.md
 
 ## Література та посилання
 - [Pro Git (укр.)](https://git-scm.com/book/uk/v2)

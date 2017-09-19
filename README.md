@@ -28,6 +28,7 @@
       - Хмарні сервіси контролю версій (github)
     - Матеріали:
       - [План](lectures/04-git.md)
+      - [Слайди](https://vntu-kpp.herokuapp.com/slides/04-git)
 
 [Лабораторна 1: Розробка браузерної аплікації](labs/01-browser.md)
 

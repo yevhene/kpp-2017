@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"01-browser@./apps/examples/01-browser":
+"01-browser@./examples/01-browser":
   version "1.0.0"
   dependencies:
     express "^4.15.4"
@@ -14,6 +14,15 @@ accepts@~1.3.3:
     mime-types "~2.1.16"
     negotiator "0.6.1"
 
+app@./app:
+  version "1.0.0"
+  dependencies:
+    examples "./examples"
+    express "~4.14.0"
+    glob "^7.1.2"
+    marked "^0.3.6"
+    slides "./slides"
+
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
@@ -21,15 +30,6 @@ array-flatten@1.1.1:
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
-
-base@./apps/base:
-  version "1.0.0"
-  dependencies:
-    examples "./apps/examples"
-    express "~4.14.0"
-    glob "^7.1.2"
-    marked "^0.3.6"
-    slides "./apps/slides"
 
 brace-expansion@^1.1.7:
   version "1.1.8"
@@ -102,10 +102,10 @@ etag@~1.8.0:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
-examples@./apps/examples:
+examples@./examples:
   version "1.0.0"
   dependencies:
-    "01-browser" "./apps/examples/01-browser"
+    "01-browser" "./examples/01-browser"
     express "~4.14.0"
 
 express-ejs-layouts@^2.3.1:
@@ -414,7 +414,7 @@ setprototypeof@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
 
-slides@./apps/slides:
+slides@./slides:
   version "1.0.0"
   dependencies:
     ejs "^2.5.7"
