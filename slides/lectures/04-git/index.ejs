@@ -2,3 +2,681 @@
   <h1>Git</h1>
   <h2>Лекція 4</h2>
 </section>
+
+<section>
+  <h2>SCM</h2>
+
+  <section>
+    <h3>Source Control Management</h3>
+  </section>
+
+  <section>
+    <h3>Локальні</h3>
+
+    <img src="images/scm-local.png" />
+  </section>
+
+  <section>
+    <h3>Локальні</h3>
+
+    <dl>
+      <dt>Networking</dt><dd>None</dd>
+      <dt>Operations</dt><dd>One file at a time</dd>
+      <dt>Concurrency</dt><dd>Locks</dd>
+      <dt>Examples</dt><dd>RCS, SCCS</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h3>Централізовані</h3>
+
+    <img src="images/scm-centralized.png" />
+  </section>
+
+  <section>
+    <h3>Централізовані</h3>
+
+    <dl>
+      <dt>Networking</dt><dd>Centralized</dd>
+      <dt>Operations</dt><dd>Multi-file</dd>
+      <dt>Concurrency</dt><dd>Merge before commit</dd>
+      <dt>Examples</dt><dd>CVS, SourceSafe, Subversion, Team Foundation Server</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h3>Розподілені</h3>
+
+    <img src="images/scm-distributed.png" />
+  </section>
+
+  <section>
+    <h3>Розподілені</h3>
+
+    <dl>
+      <dt>Networking</dt><dd>Distributed</dd>
+      <dt>Operations</dt><dd>Changesets</dd>
+      <dt>Concurrency</dt><dd>Commit before merge</dd>
+      <dt>Examples</dt><dd>Bazaar, Git, Mercurial</dd>
+    </dl>
+  </section>
+</section>
+
+<section>
+  <h2>Git</h2>
+
+  <section data-markdown>
+	  <textarea data-template>
+The name "git" was given by Linus Torvalds when he wrote the very
+first version.
+
+He described the tool as "the stupid content tracker"
+and the name as (depending on your way):
+
+ - random 3-letter combination not used by any UNIX command.
+ - stupid. contemptible and despicable. simple. (slang).
+ - "global information tracker": you're in a good mood.
+ - "g*dd*mn idiotic truckload of sh*t": when it breaks.
+	  </textarea>
+  </section>
+</section>
+
+<section>
+  <h2>Налагодження</h2>
+
+  <pre><code class="hljs" data-trim contenteditable>
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+  </code></pre>
+</section>
+
+<section>
+  <h2>Основи</h2>
+
+  <section>
+    <h3>Створення репозиторію</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git init
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Initialized empty Git repository in /home/user/project/.git/
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Add files</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git add README.md
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Коміт</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git commit -m "first commit"
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+[master (root-commit) 851ff9f] first commit
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README.md
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Статус</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git status
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+On branch master
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+	modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Зміни</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git diff
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+diff --git a/README.md b/README.md
+index e69de29..9b6ba49 100644
+--- a/README.md
++++ b/README.md
+@@ -0,0 +1,3 @@
++# test
++
++Файл відредаговано
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Історія</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git log
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+commit 11d6c01f8030522b5423334e3ea3bcace8e6bd2c
+Author: Yevhen Shemet &lt;yevhene@gmail.com&gt;
+Date:   Wed Sep 20 00:08:54 2017 +0300
+
+    readme updated
+
+commit 851ff9f199bbf26ee2abef32379f98b0fde7ae0c
+Author: Yevhen Shemet &lt;yevhene@gmail.com&gt;
+Date:   Wed Sep 20 00:07:24 2017 +0300
+
+    first commit
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Відміна змін в staging</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git reset
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Відміна змін</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git reset --hard
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Відміна коміту</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git reset --hard HEAD~1
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Процес</h2>
+
+  <section>
+    <h3>Зони</h3>
+
+    <img src="images/git-zones.png" />
+  </section>
+
+  <section>
+    <h3>Знімки файлів</h3>
+
+    <img src="images/git-snapshots.png" />
+  </section>
+
+  <section>
+    <h3>Версії</h3>
+
+    <img src="images/git-versions.png" />
+  </section>
+
+  <section>
+    <h3>Цикл життя файла</h3>
+
+    <img src="images/git-file-lifecycle.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Демо</h2>
+
+  <section>
+    <h3>GitKraken</h3>
+
+    <img src="images/git-kraken.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Гілки</h2>
+
+  <section>
+    <h3>master</h3>
+
+    <img src="images/git-branch-master.png" />
+  </section>
+
+  <section>
+    <h3>Створення гілки testing</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git branch testing
+    </code></pre>
+
+    <img src="images/git-branch-testing.png" />
+  </section>
+
+  <section>
+    <h3>HEAD</h3>
+
+    <img src="images/git-branch-master-head.png" />
+  </section>
+
+  <section>
+    <h3>Зміна гілки</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout testing
+    </code></pre>
+
+    <img src="images/git-branch-testing-head.png" />
+  </section>
+
+  <section>
+    <h3>Створення нового коміту в testing</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git commit -m "new commit"
+    </code></pre>
+
+    <img src="images/git-branch-testing-commit.png" />
+  </section>
+
+  <section>
+    <h3>Зміна гілки (назад)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout master
+    </code></pre>
+
+    <img src="images/git-branch-checkout-master.png" />
+  </section>
+
+  <section>
+    <h3>Створення нового коміту в master</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git commit -m "new commit"
+    </code></pre>
+
+    <img src="images/git-branch-master-commit.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Merge</h2>
+
+  <section>
+    <h3>master</h3>
+
+    <img src="images/git-merge-master.png" />
+  </section>
+
+  <section>
+    <h3>Створення гілки iss53</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout -b iss53
+    </code></pre>
+
+    <img src="images/git-merge-iss53.png" />
+  </section>
+
+  <section>
+    <h3>Коміт в iss53</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ vim index.html
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ git commit -a -m 'added a new footer [issue 53]'
+    </code></pre>
+
+    <img src="images/git-merge-iss53-changes.png" />
+  </section>
+
+  <section>
+    <h3>Хот-фікс</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout master
+Switched to branch 'master'
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ vim index.html
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ git commit -a -m 'fixed the broken email address'
+[hotfix 1fb7853] fixed the broken email address
+ 1 file changed, 2 insertions(+)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Хот-фікс</h3>
+
+    <img src="images/git-merge-hotfix.png" />
+  </section>
+
+  <section>
+    <h3>Перемотка (Fast-forward)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout master
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ git merge hotfix
+Updating f42c576..3a0874c
+Fast-forward
+ index.html | 2 ++
+ 1 file changed, 2 insertions(+)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Перемотка (Fast-forward)</h3>
+
+    <img src="images/git-merge-fast-forward.png" />
+  </section>
+
+  <section>
+    <h3>Видалення гілки</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git branch -d hotfix
+Deleted branch hotfix (3a0874c).
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Відгалудження</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout iss53
+Switched to branch "iss53"
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ vim index.html
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ git commit -a -m 'finished the new footer [issue 53]'
+[iss53 ad82d7a] finished the new footer [issue 53]
+1 file changed, 1 insertion(+)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Відгалудження</h3>
+
+    <img src="images/git-merge-iss53-more-changes.png" />
+  </section>
+
+  <section>
+    <h3>Злиття</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git checkout master
+Switched to branch 'master'
+    </code></pre>
+    <pre><code class="hljs" data-trim contenteditable>
+$ git merge iss53
+Merge made by the 'recursive' strategy.
+index.html |    1 +
+1 file changed, 1 insertion(+)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Злиття</h3>
+
+    <img src="images/git-merge-before.png" />
+  </section>
+
+  <section>
+    <h3>Злиття</h3>
+
+    <img src="images/git-merge-after.png" />
+  </section>
+
+  <section>
+    <h3>Конфлікт</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git merge iss53
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and then commit the result.
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Конфлікт</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+
+Unmerged paths:
+  (use "git add &lt;file&gt;..." to mark resolution)
+
+    both modified:      index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Конфлікт</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:index.html
+&lt;div id="footer"&gt;contact : email.support@github.com&lt;/div&gt;
+=======
+&lt;div id="footer"&gt;
+ please contact us at support@github.com
+&lt;/div&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; iss53:index.html
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Конфлікт</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git commit
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Merge branch 'iss53'
+
+Conflicts:
+    index.html
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   index.html
+#
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Віддалена взаємодія</h2>
+
+  <section>
+    <h3>Клонування репозиторію</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git clone git@github.com:yevhene/kpp.git
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Клонування репозиторію</h3>
+
+    <img src="images/git-remote-clone.png" />
+  </section>
+
+  <section>
+    <h3>Додавання remote</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git remote add origin git@github.com:yevhene/kpp.git
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Синхронізація</h3>
+
+    <img src="images/git-remote-changes.png" />
+  </section>
+
+  <section>
+    <h3>Синхронізація</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git fetch origin
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Синхронізація</h3>
+
+    <img src="images/git-remote-fetch.png" />
+  </section>
+
+  <section>
+    <h3>Зтягування даних</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git pull origin master
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git pull
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Відправка даних</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git push origin master
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+git push
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Хмарні сервіси</h2>
+
+  <section>
+    <ul>
+      <li>GitHub</li>
+      <li>GitLab</li>
+      <li>BitBucket</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Github</h3>
+
+    <img src="images/github-clone.png" />
+  </section>
+
+  <section>
+    <h3>Clone</h3>
+
+    <ul>
+      <li>ssh</li>
+      <li>https</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Open Source</h3>
+
+    <ul>
+      <li>Issues</li>
+      <li>Fork</li>
+      <li>Pull Request</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Markdown</h2>
+
+  <section>
+    <h3>README.md</h3>
+
+    <img src="images/github-readme.png" />
+  </section>
+
+  <section>
+    <pre><code class="hljs" data-trim contenteditable>
+### Крос-платформне Програмування
+
+1. Основи
+    - Теми:
+      - Основні поняття Крос-платформного Програмування
+      - Мова JavaScript
+    - Матеріали
+      - [Конспект](lectures/01-javascript.md)
+    </code></pre>
+  </section>
+
+  <section data-markdown>
+	  <textarea data-template>
+### Крос-платформне Програмування
+
+1. Основи
+    - Теми:
+      - Основні поняття Крос-платформного Програмування
+      - Мова JavaScript
+    - Матеріали
+      - [Конспект](lectures/01-javascript.md)
+	  </textarea>
+  </section>
+</section>
+
+<section>
+  <h2>Інструменти</h2>
+
+  <ul>
+    <li>Github - https://desktop.github.com</li>
+    <li>GitKraken - https://www.gitkraken.com</li>
+  </ul>
+</section>
