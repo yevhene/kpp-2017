@@ -1,5 +1,5 @@
 {
-  "name": "kpp-base",
+  "name": "kpp-app",
   "version": "1.0.0",
   "description": "KPP Base App",
   "main": "app.js",

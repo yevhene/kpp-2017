@@ -7,10 +7,10 @@ const app = express();
 app.use('/slides', require('../slides/app'));
 app.use('/examples', require('../examples/app'));
 
-markdown.routes(app, '/', path.join(__dirname, '../../'));
-markdown.routes(app, '/docs', path.join(__dirname, '../../docs'));
-markdown.routes(app, '/labs', path.join(__dirname, '../../labs'));
-markdown.routes(app, '/lectures', path.join(__dirname, '../../lectures'));
+markdown.routes(app, '/', path.join(__dirname, '../'));
+markdown.routes(app, '/docs', path.join(__dirname, '../docs'));
+markdown.routes(app, '/labs', path.join(__dirname, '../labs'));
+markdown.routes(app, '/lectures', path.join(__dirname, '../lectures'));
 
 const port = process.env.PORT || 3000;
 

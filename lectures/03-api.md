@@ -77,9 +77,14 @@
     ```
 
 ## Формати даних
-### JSON
+### CSV
 ### XML
-### Other
+### JSON
+
+## Cros-origin request
+### Image
+### JSONP
+### CORS
 
 ## Стратегії автентификації та авторизації (token, OAuth2)
 1. apiKey
@@ -114,3 +119,7 @@
 
 ## Приклади
 - https://github.com/toddmotto/public-apis
+
+## Література
+
+[Список кодів стану HTTP](https://uk.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D1%96%D0%B2_%D1%81%D1%82%D0%B0%D0%BD%D1%83_HTTP)

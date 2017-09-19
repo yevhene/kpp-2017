@@ -6,13 +6,13 @@
   "repository": "git@github.com:yevhene/kpp.git",
   "author": "Yevhen Shemet <yevhene@gmail.com>",
   "scripts": {
-    "start": "node apps/base/app"
+    "start": "node app/app"
   },
   "engines": {
     "node": "8.5"
   },
   "dependencies": {
-    "base": "./apps/base"
+    "base": "./base"
   },
   "license": "MIT"
 }
