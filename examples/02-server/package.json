@@ -1,0 +1,11 @@
+{
+  "name": "kpp-lab-2",
+  "version": "1.0.0",
+  "description": "KPP Lab 2: Server",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
+  }
+}

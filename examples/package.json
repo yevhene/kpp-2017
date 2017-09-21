@@ -6,6 +6,7 @@
   "dependencies": {
     "express": "~4.14.0",
 
-    "01-browser": "./examples/01-browser"
+    "01-browser": "./examples/01-browser",
+    "02-server": "./examples/02-server"
   }
 }
