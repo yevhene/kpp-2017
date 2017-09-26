@@ -112,7 +112,7 @@ app.use(bodyParser.json());
 app.post('/tasks', function(req, res) {
   res.send(
     'Ви хочете створити задачу з ім\'ям "' +
-    res.name +
+    req.body.name +
     '", але на сьогодні задач не було і не буде!'
   );
 });
