@@ -3,3 +3,4 @@ alert
 prompt
 .gitignore
 createElement
+debugger

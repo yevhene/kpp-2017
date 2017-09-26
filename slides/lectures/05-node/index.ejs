@@ -1,0 +1,409 @@
+<section>
+  <h1>Node.js</h1>
+  <h2>Лекція 5</h2>
+</section>
+
+<section>
+  <h2>node.js</h2>
+
+  <section>
+    <p>це JavaScript–оточення побудоване на JavaScript–рушієві Chrome V8</p>
+  </section>
+
+  <section>
+    <p>Node.js використовує подієву, неблокуючу I/O модель, що робить його легким та ефективним. Пакетна екосистема Node.js, npm, є найбільшою у світі екосистемою бібліотек з відкритим кодом.</p>
+  </section>
+
+  <section>
+    <h3>Рушії</h3>
+
+    <ul>
+      <li>Браузерні (Rhino, SpiderMonkey, Chakra)</li>
+      <li>Headless (PhantomJS)</li>
+      <li>Незалежні (V8)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Інсталяція</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ sudo apt install nodejs
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ brew install node
+    </code></pre>
+
+    <a href="https://nodejs.org">nodejs</a>
+  </section>
+
+  <section>
+    <h3>Hello World!</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+console.log('Hello World');
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ node app.js
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Вбудовані об'єкти</h3>
+
+    <ul>
+      <li>Math</li>
+      <li>JSON</li>
+      <li>Number</li>
+      <li>Array</li>
+    </ul>
+
+    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects">джерело</a>
+  </section>
+</section>
+
+<section>
+  <h2>Пакети node.js</h2>
+
+  <section>
+    <h3>path</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var path = require('path');
+
+var currentPath = path.join(__dirname, 'app.js');
+
+console.log(currentPath);
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+```
+/home/yevhene/work/tmp/app.js
+```
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>fs</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var fs = require('fs');
+
+var content = fs.readFileSync('app.js', 'utf8');
+
+console.log(content);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>fs (async)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var fs = require('fs');
+
+fs.readFile('app.js', 'utf8', function(err, content) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(content);
+  }
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>http</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var http = require('http');
+
+var server = http.createServer(function(req, res) {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.write('Hello World');
+  res.end();
+});
+
+server.listen(3000);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Власний модуль</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+module.exports = function(a, b) {
+  return a * b;
+};
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var mul = require('./mul');
+
+console.log(add(2, 4)); //=&gt; 8
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Експорт декількох функцій</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+module.exports.mul = function(a, b) {
+  return a * b;
+};
+
+module.exports.sqr = function(n) {
+  return module.exports.mul(n, n);
+};
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var calc = require('./calc');
+
+console.log(calc.sqr(2)); //=&gt; 4
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Цикл подій (Event loop)</h2>
+
+  <section>
+    <img src="images/node-event-loop.png">
+  </section>
+
+  <section>
+    <ul>
+      <li><b>timers</b> - спрацьовують setTimeout і setInterval</li>
+      <li><b>I/O callbacks</b> - майже всі зворотні виклики</li>
+      <li><b>idle, prepare</b> - внутрішні</li>
+      <li><b>poll</b> - опитування нових подій</li>
+      <li><b>check</b> - спрацьовують setImmediate</li>
+      <li><b>close callbacks</b> - спрацьовують закриття з'єднань</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>npm</h2>
+
+  <section>
+    <h3>node package manager</h3>
+  </section>
+
+  <section>
+    <h3>Створення нового проекту</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ npm init
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+package name: (lab-2)
+version: (1.0.0)
+description:
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>package.json</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+{
+  "name": "kpp",
+  "version": "1.0.0",
+  "description": "KPP",
+  "main": "app.js",
+  "repository": "git@github.com:yevhene/kpp.git",
+  "author": "Yevhen Shemet <yevhene@gmail.com>",
+  "scripts": {
+    "start": "node app/app"
+  },
+  "engines": {
+    "node": "8.5"
+  },
+  "dependencies": {
+    "express": "~4.14.0"
+  },
+  "license": "MIT"
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Залежності (semver)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+{
+  ...,
+  "dependencies": {
+    "express": "~4.14.0",
+    "body-parser": "^1.18.1",
+    "react": "=0.16-beta",
+    "forever": "https://github.com/indexzero/forever"
+  },
+  "devDependencies": {
+    "jest": ">=21.2.0",
+    "kpp": "yevhene/kpp",
+    "lab-2": "../lab-2"
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Встановлення залежностей</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ npm install
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Додавання залежностей</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ npm install --save express
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>express</h2>
+
+  <section>
+    <h3>Швидкий, гнучкий, мінімалістичний фреймворк для веб-застосунків, побудованих на Node.js</h3>
+  </section>
+
+  <section>
+    <h3>app</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var express = require('express');
+var app = express();
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>hello world</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var express = require('express');
+var app = express();
+
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
+
+app.listen(3000);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Обробники (handlers)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+app.get('/', function(req, res) {
+  res.send('hello world');
+});
+
+app.post('/', function(req, res) {
+  res.send('world hello');
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Параметри (query)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+app.get('/search', function(req, res) {
+  res.send('Ви шукаєте ' + req.query.q + ' але то марно...');
+});
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+http://example.com/search?q=kittens
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Параметри (params)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+app.get('/tasks/:id', function(req, res) {
+  res.send('Ви хочете отримату задачу ' + req.params.id + ' але ви в курсі...');
+});
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+http://example.com/tasks/123
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>body-parser</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+npm install --save body-parser
+    </code></pre>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Параметри (body)</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+app.post('/tasks', function(req, res) {
+  res.send('Ви хочете створити задачу з назвою ' + req.body.title + ' але...');
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Статичні файли</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+app.use('/', express.static('/static'));
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>REST</h2>
+
+  <section>
+    <h3>Ресурси</h3>
+
+    <ul>
+      <li><b>GET /tasks</b> - Список</li>
+      <li><b>GET /tasks/:id</b> - Елемент</li>
+      <li><b>POST /tasks</b> - Сворення</li>
+      <li><b>PUT/PATCH /tasks/:id</b> - Оновлення</li>
+      <li><b>DELETE /tasks/:id</b> - Видалення</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Складні ресурси</h3>
+
+    <ul>
+      <li><b>GET /groups/:id/students</b> - Список студентів групи</li>
+      <li><b>POST /users/:id/photo_batch</b> - Завантаження декількох фото</li>
+      <li><b>GET /users/:id/profile</b> - Отримання профілю користувача</li>
+      <li><b>PUT /tasks/:id/completion</b> - Оновлення статусу задачі</li>
+      <li><b>GET /groups/tags</b> - Список тегів що можуть бути пов'язані з групами</li>
+    </ul>
+  </section>
+</section>
