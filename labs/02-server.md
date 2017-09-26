@@ -17,6 +17,11 @@
 
 ## node.js та npm
 
+### Налаштування Proxy
+```
+npm config set proxy http://proxy.lan:3128
+```
+
 ### Інсталяція
 `npm` встановлюється разом із `node.js` з [сайту](https://nodejs.org/uk/).
 
