@@ -93,6 +93,12 @@ res.send({ name: 'Задача' });
 app.use('/', express.static('/static'));
 ```
 
+### Запуск сервера
+```javascript
+app.listen(3000);
+```
+Сервер запуститься на `3000` порту.
+
 ## Body parser
 Необхідний для обробки тіл запитів.
 
