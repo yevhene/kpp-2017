@@ -22,7 +22,7 @@
 
 ### Налаштування Proxy
 ```
-npm config set proxy http://proxy.lan:3128
+$ npm config set proxy http://proxy.lan:3128
 ```
 
 ### Створення проекту
@@ -30,24 +30,24 @@ npm config set proxy http://proxy.lan:3128
 
 ### Інсталяція пакетів
 ```
-npm install
+$ npm install
 ```
 
 ### Додавання пакету
 ```
-npm install --save express
+$ npm install --save express
 ```
 
 ### Запуск проекту
 ```
-node app.js
+$ node app.js
 ```
 
 ## Express
 
 ### Інсталяція
 ```
-npm install --save express
+$ npm install --save express
 ```
 
 ### Ініціалізація
@@ -124,6 +124,13 @@ app.post('/tasks', function(req, res) {
 });
 ```
 
+## Робота з DOM
+
+### Вставка HTML
+```javascript
+document.getElementById('#tasks').innerHTML = '<h1>Добрий вечір</h1>';
+```
+
 ## MongoDB
 Документо-орієнтована база даних.
 
@@ -132,7 +139,7 @@ app.post('/tasks', function(req, res) {
 
 ### Інсталяція драйверу
 ```
-npm install --save mongodb
+$ npm install --save mongodb
 ```
 
 ### Під'єднання
