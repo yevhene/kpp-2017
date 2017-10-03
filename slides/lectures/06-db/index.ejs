@@ -143,6 +143,14 @@
   <h2>Драйвер mongodb</h2>
 
   <section>
+    <h3>Інсталяція</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ npm install --save mongodb
+    </code></pre>
+  </section>
+
+  <section>
     <h3>Імпорт</h3>
 
     <pre><code class="hljs" data-trim contenteditable>
@@ -173,36 +181,6 @@ MongoClient
   </section>
 
   <section>
-    <h3>Отримання набору</h3>
-
-    <pre><code class="hljs" data-trim contenteditable>
-mongo
-  .collection('students')
-  .find()
-  .toArray()
-  .then(function(strudents) {
-    console.log(students);
-  });
-    </code></pre>
-  </section>
-
-  <section>
-    <h3>Пошук елементів</h3>
-
-    <pre><code class="hljs" data-trim contenteditable>
-mongo
-  .collection('students')
-  .find({
-    firstName: 'Василь'
-  })
-  .toArray()
-  .then(function(students) {
-    console.log(students);
-  });
-    </code></pre>
-  </section>
-
-  <section>
     <h3>Створення</h3>
 
     <pre><code class="hljs" data-trim contenteditable>
@@ -214,6 +192,51 @@ mongo
   })
   .then(function() {
     console.log('Запис створено');
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Отримання набору</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .find()
+  .toArray()
+  .then(function(students) {
+    console.log(students);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Пошук елементів</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .findOne({
+    firstName: 'Василь'
+  })
+  .then(function(vasyl) {
+    console.log(vasyl);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Отримання одного елементу</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .find({
+    firstName: 'Василь'
+  })
+  .toArray()
+  .then(function(students) {
+    console.log(students);
   });
     </code></pre>
   </section>
@@ -249,6 +272,239 @@ mongo
   .then(function() {
     console.log('Запис видалено');
   });
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>ORM mongoose</h2>
+
+  <section>
+    <h3>Інсталяція</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+$ npm install --save mongoose
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Імпорт</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var mongoose = require('mongoose');
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Connection string</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var mongoUrl = 'mongodb://localhost:27017/02-server';
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>З'єднання</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongoose.Promise = global.Promise
+mongoose.connect(mongoUrl, { useMongoClient: true });
+var db = mongoose.connection;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Схема</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var studentSchema = mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  year: Number
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Модель</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var Student = mongoose.model('Student', studentSchema);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Створення</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var petro = new Student({
+  firstName: 'Петро',
+  lastName: 'Петровський'
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Збереження</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+petro
+  .save()
+  .then(function() {
+    console.log('Запис створено');
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Отримання набору</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Student
+  .find()
+  .then(function(students) {
+    console.log(students);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Пошук елементів</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Student
+  .find({
+    firstName: 'Петро'
+  })
+  .then(function(students) {
+    console.log(students);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Отримання одного елементу</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Student
+  .findOne({
+    firstName: 'Петро'
+  })
+  .then(function(petro) {
+    console.log(petro);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Зміна</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Student
+  .findOne({
+    firstName: 'Петро',
+    lastName: 'Петровський'
+  })
+  .then(function(petro) {
+    petro.lastName = 'Івановський';
+    petro
+      .save()
+      .then(function() {
+        console.log('Запис оновлено');
+      });
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Видалення</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Student
+  .findOne({
+    firstName: 'Петро',
+    lastName: 'Івановський'
+  })
+  .then(function(petro) {
+    petro
+      .remove()
+      .then(function() {
+        console.log('Запис видалено');
+      });
+  });
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>mongoose можливості</h2>
+
+  <section>
+    <h3>Складні запити</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+Person.
+  find({ occupation: /host/ }).
+  where('name.last').equals('Ghost').
+  where('age').gt(17).lt(66).
+  where('likes').in(['vaporizing', 'talking']).
+  limit(10).
+  sort('-occupation').
+  select('name occupation').
+  exec(callback);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Під-документи</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var childSchema = new Schema({ name: 'string' });
+
+var parentSchema = new Schema({
+  children: [childSchema],
+  child: childSchema
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Валідація</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var breakfastSchema = new Schema({
+  eggs: {
+    type: Number,
+    min: [6, 'Too few eggs'],
+    max: 12
+  },
+  bacon: {
+    type: Number,
+    required: [true, 'Why no bacon?']
+  },
+  drink: {
+    type: String,
+    enum: ['Coffee', 'Tea'],
+    required: function() {
+      return this.bacon > 3;
+    }
+  }
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Методи</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var AnimalSchema = new Schema({
+  name: String,
+  type: String
+});
+
+AnimalSchema.methods.findSimilarType = function findSimilarType() {
+  return this.model('Animal').find({ type: this.type });
+};
     </code></pre>
   </section>
 </section>

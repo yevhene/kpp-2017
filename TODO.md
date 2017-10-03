@@ -4,3 +4,4 @@ prompt
 .gitignore
 createElement
 debugger
+host (window/global)
