@@ -1,0 +1,254 @@
+<section>
+  <h1>Бази даних</h1>
+  <h2>Лекція 6</h2>
+</section>
+
+<section>
+  <h2>Бази даних</h2>
+
+  <section>
+    <h3>Зберігають дані</h3>
+  </section>
+
+  <section>
+    <h3>Використовують спеціалізовані структури</h3>
+
+    <ul>
+      <li>Heap файли</li>
+      <li>Hash таблиці</li>
+      <li>B+ дерева</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Типи баз даних</h2>
+
+  <section>
+    <h3>Реляційні (Relational)</h3>
+
+    <img src="images/db-type-relational.jpg" />
+  </section>
+
+  <section>
+    <h3>Реляційні (Relational)</h3>
+
+    <ul>
+      <li>MySQL</li>
+      <li>PostgreSQL</li>
+      <li>Oracle</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Ключ-значення (Key-Value)</h3>
+
+    <img src="images/db-type-key-value.png" />
+  </section>
+
+  <section>
+    <h3>Ключ-значення (Key-Value)</h3>
+
+    <ul>
+      <li>Redis</li>
+      <li>Dynamo</li>
+      <li>MemcacheDB</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Документні (Document-oriented)</h3>
+
+    <img src="images/db-type-document.png" />
+  </section>
+
+  <section>
+    <h3>Документні (Document-oriented)</h3>
+
+    <ul>
+      <li>MongoDB</li>
+      <li>CouchDB</li>
+      <li>RethinkDB</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Колоночні (Column-oriented)</h3>
+
+    <img src="images/db-type-column.png" />
+  </section>
+
+  <section>
+    <h3>Колоночні (Column-oriented)</h3>
+
+    <ul>
+      <li>MariaDB</li>
+      <li>IBM Db2</li>
+      <li>SAP HANA</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Графові (Graph database)</h3>
+
+    <img src="images/db-type-graph.png" />
+  </section>
+
+  <section>
+    <h3>Графові (Graph database)</h3>
+
+    <ul>
+      <li>Neo4j</li>
+      <li>OrientDB</li>
+      <li>Dgraph</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>MongoDB</h2>
+
+  <section>
+    <h3>Інсталяція</h3>
+
+    <a href="https://www.mongodb.com/download-center#community">з сайту</a>
+  </section>
+
+  <section>
+    <h3>CAP теорема</h3>
+
+    <img src="images/db-cap.png" />
+  </section>
+
+  <section>
+    <h3>Документ</h3>
+
+    <img src="images/db-mongo-document.svg" />
+  </section>
+
+  <section>
+    <h3>Колекції</h3>
+
+    <img src="images/db-mongo-collection.svg" />
+  </section>
+
+  <section>
+    <h3>Ідентифікатор</h3>
+
+    <img src="images/db-mongo-id.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Драйвер mongodb</h2>
+
+  <section>
+    <h3>Імпорт</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Connection string</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var mongoUrl = 'mongodb://localhost:27017/02-server';
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>З'єднання</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+var mongo;
+MongoClient
+  .connect(mongoUrl)
+  .then(function(db) {
+    mongo = db;
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Отримання набору</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .find()
+  .toArray()
+  .then(function(strudents) {
+    console.log(students);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Пошук елементів</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .find({
+    firstName: 'Василь'
+  })
+  .toArray()
+  .then(function(students) {
+    console.log(students);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Створення</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .insert({
+    firstName: 'Петро',
+    lastName: 'Петровський'
+  })
+  .then(function() {
+    console.log('Запис створено');
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Зміна</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .update({
+    firstName: 'Петро',
+    lastName: 'Петровський'
+  }, {
+    lastName: 'Івановський'
+  })
+  .then(function() {
+    console.log('Запис оновлено');
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Видалення</h3>
+
+    <pre><code class="hljs" data-trim contenteditable>
+mongo
+  .collection('students')
+  .remove({
+    firstName: 'Петро',
+    lastName: 'Івановський'
+  })
+  .then(function() {
+    console.log('Запис видалено');
+  });
+    </code></pre>
+  </section>
+</section>
