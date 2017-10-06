@@ -20,6 +20,11 @@
 ### Інсталяція
 `npm` встановлюється разом із `node.js` з [сайту](https://nodejs.org/uk/).
 
+#### Linux
+```
+$ sudo apt install nodejs
+```
+
 ### Налаштування Proxy
 ```
 $ npm config set proxy http://proxy.lan:3128
@@ -136,6 +141,11 @@ document.getElementById('#tasks').innerHTML = '<h1>Добрий вечір</h1>'
 
 ### Інсталяція бази даних
 З [сайту](https://www.mongodb.com/download-center#community).
+
+#### Linux
+```
+$ sudo apt install mongodb
+```
 
 ### Інсталяція драйверу
 ```
