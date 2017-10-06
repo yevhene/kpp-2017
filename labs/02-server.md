@@ -95,7 +95,7 @@ res.send({ name: 'Задача' });
 
 ### Обробка статичних файлів
 ```javascript
-app.use('/', express.static('/static'));
+app.use('/', express.static(__dirname + '/static'));
 ```
 
 ### Запуск сервера
