@@ -1,0 +1,638 @@
+<section>
+  <h1>Стандарт ECMAScript</h1>
+  <h2>Лекція 7</h2>
+</section>
+
+<section>
+  <h2>Створення</h2>
+
+  <section>
+    <h3>JavaScript</h3>
+
+    <p><b>Брендан Айк</b> розробив у Грудні 1995-го, для компанії <b>Netscape</b> мову програмування <i>Mocha</i>, пізніше <i>LiveScript</i>, і через деякий час нарешті <i>JavaScript</i>.</p>
+  </section>
+
+  <section>
+    <h3>JScript</h3>
+
+    <p><b>Microsoft</b> щоб уникнути проблем з торговою маркою, у Серпні 1996-го, створила <i>JScript</i>. Що частково відрізнявся від <i>JavaScript</i>.</p>
+  </section>
+
+  <section>
+    <h3>ECMAScript</h3>
+
+    <p><b>Netscape</b> у Лістопаді 1996-го почала процес стандартизаці, за допомогою компанії <i>Ecma International</i>. Новий стандарт <i>ECMA-262</i>, за згодою учасників, до складу яких приєднався згодом <b>Microsoft</b>, отримав назву <i>ECMAScript</i>.</p>
+  </section>
+
+  <section>
+    <h3>TC39</h3>
+
+    <p><b>Technical Committee 39</b> займається розробкою і розвитком стандарту <i>ECMAScript</i>.</p>
+  </section>
+</section>
+
+<section>
+  <h2>Розвиток</h2>
+
+  <section>
+    <h3>Ранні версії</h3>
+
+    <table>
+      <thead>
+        <tr><th>Версія</th><th>Дата</th><th>Зміни</th></tr>
+      </thead>
+
+      <tbody>
+        <tr><td>1</td><td>Червень 1997</td><td></td></tr>
+        <tr><td>2</td><td>Червень 1998</td><td>Узгоджено зі стандартом ISO/IEC 16262</td></tr>
+        <tr><td>3</td><td>Грудень 1999</td><td>Регулярні вирази, обробки винятків, додаткові можливості</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>4-а версія</h3>
+
+    <table>
+      <thead>
+        <tr><th>Версія</th><th>Дата</th><th>Зміни</th></tr>
+      </thead>
+
+      <tbody>
+        <tr><td>4</td><td>не випущена</td><td>Класи, модулі, статична типізація, генератори, ітератори, деструктивне просвоєння, алгебраїчні типи даних</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>5-а версія</h3>
+
+    <table>
+      <thead>
+        <tr><th>Версія</th><th>Дата</th><th>Зміни</th></tr>
+      </thead>
+
+      <tbody>
+        <tr><td>5</td><td>Грудень 2009</td><td>"strict mode", JSON, рефлекія, численні виправлення та прояснення</td></tr>
+        <tr><td>5.1</td><td>Червень 2001</td><td>Узгоджено зі стандартом ISO/IEC 16262:2011</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>Сучасні (Harmony)</h3>
+
+    <table>
+      <thead>
+        <tr><th>Версія</th><th>Дата</th><th>Зміни</th></tr>
+      </thead>
+
+      <tbody>
+        <tr><td>6 (2015)</td><td>Червень 2015</td><td>Класи, модулі, генератори, ітератори, деструктивне просвоєння, обіцянки, рефлексія, проксі</td></tr>
+        <tr><td>7 (2016)</td><td>Червень 2016</td><td>Експонента **, Array.prototype.includes</td></tr>
+        <tr><td>8 (2017)</td><td>Червень 2017</td><td>async/await, SIMD, метапрограмування</td></tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+
+<section>
+  <h2>Процесс</h2>
+
+  <section>
+    <h3>Пропозиції</h3>
+
+    <a href="https://github.com/tc39/proposals">https://github.com/tc39/proposals</a>
+  </section>
+
+  <section>
+    <h3>Етапи (Stages)</h3>
+
+    <table>
+      <thead>
+        <tr><th>Етап</th><th>Назва</th><th>Очікування</th></tr>
+      </thead>
+
+      <tbody>
+        <tr><td>0</td><td>Strawman</td><td></td></tr>
+        <tr><td>1</td><td>Proposal</td><td>Поліфіли / демо</td></tr>
+        <tr><td>2</td><td>Draft</td><td>Експериментальна реалізация</td></tr>
+        <tr><td>3</td><td>Candidate</td><td>Узгоджено зі специфікацією</td></tr>
+        <tr><td>4</td><td>Finished</td><td>Поставляється з частиною браузерів</td></tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+
+<section>
+  <h2>Сучасний стан</h2>
+</section>
+
+<section>
+  <h2>Область видимості (scope)</h2>
+
+  <section>
+    <h3>let</h3>
+
+    <pre><code class="javascript" data-trim>
+{
+  var a = 8;
+  let b = 9;
+}
+a; //=> 8
+b; //=> ReferenceError
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>let</h3>
+
+    <pre><code class="javascript" data-trim>
+for (let i = 0; i < buttons.length; ++i) {
+  button[i].onclick = function() {
+    alert(i);
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>const</h3>
+
+    <pre><code class="javascript" data-trim>
+const a = 8;
+a = 9; //=> TypeError
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Символ (Symbol)</h2>
+
+  <section>
+    <pre><code class="javascript" data-trim>
+const a = Symbol('name');
+    </code></pre>
+  </section>
+
+  <section>
+    <pre><code class="javascript" data-trim>
+const a = Symbol('name');
+const b = Symbol('name');
+a == b; //=> false
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Глобальний реєстр</h3>
+
+    <pre><code class="javascript" data-trim>
+// створення в реєстрі
+let name = Symbol.for("name");
+
+// читання з реєстра
+Symbol.for("name") == name; //=> true
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Загальновідомі (Well-known)</h3>
+
+    <pre><code class="javascript" data-trim>
+Symbol.iterator
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Строки</h2>
+
+  <section>
+    <h4>Шаблонні строки (Template strings)</h4>
+    <pre><code class="javascript" data-trim>
+`In JavaScript '\n' is a line-feed.`
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Багатострічкова</h4>
+    <pre><code class="javascript" data-trim>
+`In JavaScript this is
+not legal.`
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Інтерполяція</h4>
+    <pre><code class="javascript" data-trim>
+var name = 'Bob', time = 'today';
+`Hello ${name}, how are you ${time}?`
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Об'єкти</h2>
+
+  <section>
+    <h3>Складені ключі</h3>
+
+    <pre><code class="javascript" data-trim>
+const name = 'Василь';
+const age = 19;
+const ages = {
+  ['Користувач ' + name]: age
+};
+
+ages['Користувач Василь']; //=> 19
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Короткий запис ключ/значення</h3>
+
+    <pre><code class="javascript" data-trim>
+const name = 'Василь';
+const sudent = {
+  name, group: 'КН'
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Короткий запис методів</h3>
+
+    <pre><code class="javascript" data-trim>
+const dog = {
+  old_bark: function() {
+    aler('Старе Гав');
+  },
+
+  bark() {
+    aler('Гав');
+  }
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Розгортування об'єкта</h3>
+
+    <pre><code class="javascript" data-trim>
+const sudent = {
+  group: 'КН'
+};
+
+const another_student = {
+  ...student,
+  name: 'Василь'
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Деструкція</h3>
+
+    <pre><code class="javascript" data-trim>
+const sudent = {
+  group: 'КН'
+};
+
+const { group } = student;
+group; //=> КН
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Функції</h2>
+
+  <section>
+    <h4>Аргументи за замовчуванням (default)</h4>
+    <pre><code class="javascript" data-trim>
+function hello(name = 'студент') {
+  alert(`Привіт ${name}`);
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Змінна кількість аргументів (rest)</h4>
+    <pre><code class="javascript" data-trim>
+function f(x, ...y) {
+  // y - масив
+  return x * y.length;
+}
+
+f(3, 'second', true) // => 6
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Розгортування аргументів (spread)</h4>
+    <pre><code class="javascript" data-trim>
+function f(x, y, z) {
+  return x + y + z;
+}
+
+f(...[1,2,3]) // => 6
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Деструкція аргументів</h4>
+    <pre><code class="javascript" data-trim>
+const student = {
+  personal: {
+    name: 'Василь'
+  },
+  group: 'КН'
+}
+
+function info({ personal: { name }, group }) {
+  return `${name} з ${group}`;
+}
+
+info(student); //=> `Василь з КН`
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Стрілочна функція</h4>
+    <pre><code class="javascript" data-trim>
+function inc(n) {
+  return n + 1;
+}
+
+const inc1 = n => n + 1;
+
+const add = (a, b) => {
+  return a + b;
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h4>Хвостова рекурсія (tail recursion)</h4>
+    <pre><code class="javascript" data-trim>
+function bin(a, n) {
+  if (n == 0) {
+    return a;
+  } else {
+    return bin(a * 2, n);
+  }
+}
+
+bin(3, 2) // => 12
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>ООП</h2>
+
+  <section>
+    <h3>Було</h3>
+
+    <pre><code class="javascript" data-trim>
+function Admin(name, permissions) {
+  super(name);
+  this.permissions = permissions;
+}
+
+Admin.prototype.revokeAll = function() {
+  this.permissions = [];
+};
+
+Admin.withDefaultPermissions = function(name) {
+    return new Admin(name, ['basic']);
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Стало</h3>
+    <pre><code class="javascript" data-trim>
+class Admin extends User {
+  constructor(name, permissions) {
+    super(name);
+    this.permissions = permissions;
+  }
+
+  revokeAll() {
+    this.permissions = [];
+  }
+
+  static withDefaultPermissions(name) {
+    return new Admin(name, ['basic']);
+  }
+}
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Ітератори</h2>
+
+  <section>
+    <pre><code class="javascript" data-trim>
+let a = [1, 2];
+let iter = a[Symbol.iterator];
+let instance = iter();
+
+i.next().value; //=> 1
+i.next().value; //=> 2
+i.next().done; //=> true
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>for..of</h3>
+
+    <pre><code class="javascript" data-trim>
+for (let i of [1, 2]) {
+  ...
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Власні</h3>
+
+    <pre><code class="javascript" data-trim>
+const Pokémon = {
+  [Symbol.iterator]: function() {
+    const list = ['Pikachu', 'Charmander', 'Bulbasaur'];
+    let i = -1;
+    return {
+      next() {
+        i++;
+        return {
+          value: list[i],
+          done: i == length(list)
+        }
+      }
+    }
+  }
+}
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Асинхронність</h2>
+
+  <section>
+    <h3>Обіцянки (Promises)</h3>
+
+    <h4>Створення</h4>
+    <pre><code class="javascript" data-trim>
+var p = new Promise(function(resolve, reject) {
+  resolve(result);
+  //або
+  reject(error);
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Обіцянки (Promises)</h3>
+
+    <h4>Ланцюжок обробників</h4>
+    <pre><code class="javascript" data-trim>
+p.then(function(result) {
+  // Обробка результата
+}).then(function(result) {
+  // Наступний обробник
+}).catch(function(error) {
+  // Обробка помилки
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Обіцянки (Promises)</h3>
+
+    <h4>Групування</h4>
+    <pre><code class="javascript" data-trim>
+var p = Promise.all([promise1, promise2])
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Генератори</h3>
+
+    <pre><code class="javascript" data-trim>
+var positives = function *() {
+  var cur = 1;
+  while (true) {
+    yield cur++;
+  }
+};
+
+var gen = positives();
+gen.next().value; // => 1
+gen.next().value; // => 2
+
+var gen1 = positives();
+gen1.next().value; // => 1
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Генератори</h3>
+
+    <h4>Як функції що перериваються</h4>
+    <pre><code class="javascript" data-trim>
+function *index() {
+  const drivers = yield DriverDetails.findAll();
+
+  this.body = JSON.stringify(drivers);
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>async/await</h3>
+
+    <pre><code class="javascript" data-trim>
+async function index() {
+  const drivers = await DriverDetails.findAll();
+
+  this.body = JSON.stringify(drivers);
+};
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Модулі</h2>
+
+  <section>
+    <h3>Експорт</h3>
+
+    <pre><code class="javascript" data-trim>
+export function one() {
+  ...
+}
+
+export default function two() {
+  ...
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Імпорт</h3>
+
+    <pre><code class="javascript" data-trim>
+import two, { one } from 'my_module';
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+import second, { one as first } from 'my_module';
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Чи можна вже?</h2>
+
+  <section>
+    <h3>Браузери</h3>
+
+    <a href="http://kangax.github.io/compat-table">http://kangax.github.io/compat-table</a>
+  </section>
+
+  <section>
+    <h3>node</h3>
+
+    <a href="http://node.green">http://node.green</a>
+  </section>
+</section>
+
+<section>
+  <h2>А що ж робити?</h2>
+
+  <section>
+    <h3>Поліфіли (polyfill)</h3>
+
+    <p>Застосування власної або бібліотечної реалізації можливостей, що мали б бути в браузері.</p>
+
+    <ul>
+      <li>HTML5 Shiv - популярна бібліотека поліфілів</li>
+      <li>modernizr - визначає яких фіч немає</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Траспіляція (transpile)</h3>
+
+    <p>Перетворення коду в код на іншій мові, одного рівня абстракції.</p>
+
+    <ul>
+      <li>Babel - популярний інструмент транспіляції JavaScript нової версії, в більш стару</li>
+      <li>TypeScript - статично типізована мова схожа на JavaScript</li>
+    </ul>
+  </section>
+</section>
