@@ -60,9 +60,6 @@
     - Матеріали:
       - [План](lectures/06-db.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/06-db)
-
---- Ми тут ---
-
 7. Стандарт ECMAScript
     - Теми:
       - Сучасний стан
@@ -72,21 +69,24 @@
     - Матеріали:
       - [План](lectures/07-ecma.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/07-ecma)
+
+--- Ми тут ---
+
 8. Виробнича середа для API та компонентів
     - Теми:
       - Розгортування (deploy)
-      - Неперервна інтеграція (Continuous Integration / Delivery)
       - Хмарні сервіси (heroku)
       - Менеджери компонентів (foreman, pm2)
     - Матеріали:
       - [План](lectures/08-production.md)
-
+      - [Слайди](https://vntu-kpp.herokuapp.com/slides/07-production)
 9. Оточення для настільних аплікацій electron
 10. Інтеграція компонентів за допомогою брокера повідомлень Redis
 11. Тестування та стандарти якості
     - Теми:
       - Перевірка якості (eslint)
       - Тестування
+      - Неперервна інтеграція (Continuous Integration)
       - Документація
     - Матеріали:
       - [План](lectures/11-testing.md)

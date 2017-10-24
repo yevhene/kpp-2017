@@ -8,9 +8,6 @@
   "scripts": {
     "start": "node app/app"
   },
-  "engines": {
-    "node": "8.5"
-  },
   "dependencies": {
     "app": "./app"
   },

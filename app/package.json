@@ -8,9 +8,6 @@
   "scripts": {
     "start": "node app"
   },
-  "engines": {
-    "node": "8.5"
-  },
   "dependencies": {
     "glob": "^7.1.2",
     "examples": "./examples",

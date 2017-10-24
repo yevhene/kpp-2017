@@ -14,4 +14,6 @@ markdown.routes(app, '/lectures', path.join(__dirname, '../lectures'));
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => console.log(`App listening ${port} port`));
+app.listen(port, () => {
+  console.log(`App listening http://localhost:${port} port`)
+});
