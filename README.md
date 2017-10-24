@@ -79,7 +79,7 @@
       - Менеджери компонентів (foreman, pm2)
     - Матеріали:
       - [План](lectures/08-production.md)
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/07-production)
+      - [Слайди](https://vntu-kpp.herokuapp.com/slides/08-production)
 9. Оточення для настільних аплікацій electron
 10. Інтеграція компонентів за допомогою брокера повідомлень Redis
 11. Тестування та стандарти якості
