@@ -5,3 +5,4 @@ prompt
 createElement
 debugger
 host (window/global)
+npm install -g

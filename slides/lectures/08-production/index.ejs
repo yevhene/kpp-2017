@@ -65,6 +65,12 @@
   </section>
 
   <section>
+    <h3>Вкажіть на GitHub</h3>
+
+    <img src="images/github-website.png" />
+  </section>
+
+  <section>
     <h3>Відладка</h3>
 
     <img src="images/heroku-logs.png" />
@@ -102,18 +108,112 @@
 </section>
 
 <section>
-  <h2>Підготовка до розгортування</h2>
+  <h2>Підготовка</h2>
 
   <section>
     <h3>MongoDB</h3>
+
+    <pre><code class="javascript" data-trim>
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
+
+const localUrl = 'mongodb://localhost:27017/02-server';
+const mongoUrl = process.env.MONGODB_URI || localUrl;
+
+let mongo;
+MongoClient
+  .connect(mongoUrl)
+  .then(function(db) {
+    mongo = db;
+  });
+    </code></pre>
   </section>
 
   <section>
-    <h3>package.json</h3>
+    <h3>package.json (head)</h3>
+
+    <pre><code class="javascript" data-trim>
+{
+  "name": "kpp-lab-1",
+  "version": "1.0.0",
+  "description": "KPP Lab 1: Browser",
+  "main": "app.js",
+  "homepage": "https://kpp-lab-1.herokuapp.com",
+  "author": "Yevhen Shemet &ltyevhen@vntu.edu.ua&gt"
+  "repository": "git@github.com:yevhene/kpp-lab-1.git",
+  "license": "MIT",
+  ...
+}
+    </code></pre>
   </section>
 
   <section>
-    <h3>Procfile</h3>
+    <h3>package.json (dependencies)</h3>
+
+    <pre><code class="javascript" data-trim>
+{
+  ...,
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31"
+  },
+  "dependencies": {
+    "eslint": "^1.18.1"
+  },
+  ...
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>package.json (scripts)</h3>
+
+    <pre><code class="javascript" data-trim>
+{
+  ...,
+  "scripts": {
+    "start": "node app.js"
+    "lint": "node_modules/.bin/eslint ./"
+  },
+  ...
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>package.json (run)</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm start
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+$ npm run test
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Processes</h3>
+
+    <b>Procfile</b>
+
+    <pre><code class="javascript" data-trim>
+web: NODE_ENV=production node my_app.js
+worker: node regular_task.js
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Processes (heroku)</h3>
+
+    <img src="images/heroku-dynos.png" />
+  </section>
+
+  <section>
+    <h3>Processes (production)</h3>
+
+    <img src="images/heroku-production.png" />
   </section>
 </section>
 
@@ -122,9 +222,101 @@
 
   <section>
     <h3>foreman</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install --save-dev node-foreman
+    </code></pre>
+
+    <b>Procfile</b>
+    <pre><code class="javascript" data-trim>
+web: node web_server.js
+api: node api_server.js
+log: node log_server.js
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+node_modules/.bin/nf start web=5
+    </code></pre>
   </section>
 
   <section>
     <h3>pm2</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install --save pm2
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>pm2 (global)</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install -g pm2
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>pm2 (config)</h3>
+
+    <b>process.yml</b>
+    <pre><code class="javascript" data-trim>
+apps:
+  - name: admin
+    script: app.js
+    watch: true
+    out_file: logs/admin.out.log
+    err_file: logs/admin.err.log
+    env:
+        PORT: 3000
+  - name: public-api
+    script: apps/public-api/app.js
+    cwd: apps/public-api
+    watch: true
+    out_file: ../../logs/public-api.out.log
+    err_file: ../../logs/public-api.err.log
+    env:
+        PORT: 7080
+  - name: driver-udp
+    script: apps/driver-udp/app.js
+    cwd: apps/driver-udp
+    watch: true
+    out_file: ../../logs/driver-udp.out.log
+    err_file: ../../logs/driver-udp.err.log
+    env:
+        PORT: 31337
+  ...
+  - name: notifications
+  - name: payments
+  - name: bots
+  - name: legacy-public
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>pm2 (start)</h3>
+
+    <pre><code class="javascript" data-trim>
+$ node_modules/.bin/pm2 start process.yml
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>pm2 (list)</h3>
+
+    <pre><code class="javascript" data-trim>
+$ pm2 list
+    </code></pre>
+
+    <img src="images/pm2-list.png" />
+  </section>
+
+  <section>
+    <h3>pm2 (monit)</h3>
+
+    <pre><code class="javascript" data-trim>
+$ pm2 monit
+    </code></pre>
+
+    <img src="images/pm2-monit.png" />
   </section>
 </section>
