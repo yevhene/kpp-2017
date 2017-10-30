@@ -1,0 +1,12 @@
+{
+  "name": "kpp-lab-3-desktop",
+  "version": "1.0.0",
+  "description": "KPP Lab 3: Desktop",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "~1.7.8"
+  }
+}

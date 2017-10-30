@@ -14,6 +14,13 @@
     express "^4.15.4"
     mongodb "^2.2.31"
 
+"03-desktop@./examples/03-desktop/server":
+  version "1.0.0"
+  dependencies:
+    body-parser "^1.18.1"
+    express "^4.15.4"
+    mongodb "^2.2.31"
+
 accepts@~1.3.3, accepts@~1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/accepts/-/accepts-1.3.4.tgz#86246758c7dd6d21a6474ff084a4740ec05eb21f"
@@ -149,6 +156,7 @@ examples@./examples:
   dependencies:
     "01-browser" "./examples/01-browser"
     "02-server" "./examples/02-server"
+    "03-desktop" "./examples/03-desktop/server"
     express "~4.14.0"
 
 express-ejs-layouts@^2.3.1:

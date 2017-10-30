@@ -11,4 +11,7 @@ app.use('/01-browser', lab1);
 const lab2 = require('./02-server/app');
 app.use('/02-server', lab2);
 
+const lab3 = require('./03-desktop/server/app');
+app.use('/03-desktop', lab3);
+
 module.exports = app;

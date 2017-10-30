@@ -11,7 +11,7 @@
 ### Завдання
 Розробити статичний браузерну аплікацію, що отримує дані з відкритого API, та відображає їх на мапі.
 
-### [Приклад](https://vntu-kpp.herokuapp.com/labs/01-browser/)
+### [Приклад](https://vntu-kpp.herokuapp.com/examples/01-browser/)
 
 ## Мапи
 
