@@ -4,7 +4,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 let win;
 
-app.on('ready', function() {
+function createWindow() {
   win = new BrowserWindow({width: 800, height: 600});
   win.on('closed', () => {
     win = null;
@@ -13,7 +13,9 @@ app.on('ready', function() {
   win.setMenu(null);
 
   win.loadURL(`file://${__dirname}/app/index.html`);
-});
+}
+
+app.on('ready', createWindow);
 
 // OSX: Close when all windows closed
 app.on('window-all-closed', function() {

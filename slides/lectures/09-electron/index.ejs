@@ -1,0 +1,397 @@
+<section>
+  <h1>Electron</h1>
+  <h2>Лекція 9</h2>
+</section>
+
+<section>
+  <h2>Electron</h2>
+
+  <section>
+    <h4>бібліотека з відкритим кодом, розроблена GitHub для побудови крос-платформних настільних аплікацій за допомогою HTML, CSS, та JavaScript.</h4>
+  </section>
+</section>
+
+<section>
+  <h2>Використовують</h2>
+
+  <ul>
+    <li>Atom</li>
+    <li>GitHub Desktop</li>
+    <li>Slack</li>
+    <li>Visual Studio Code</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Історія</h2>
+
+  <section>
+    <h3>Попередники</h3>
+
+    <ul>
+      <li>node-webkit</li>
+      <li>NW.js</li>
+      <li>Atom Shell</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Етапи</h3>
+
+    <ul>
+      <li><b>Квітень 2013</b> Atom Shell розпочато;</li>
+      <li><b>Травень 2014</b> відкрито код Atom Shell;</li>
+      <li><b>Квітень 2015</b> Atom Shell переіменовано на Electron;</li>
+      <li><b>Травень 2016</b> Electron випуск v1.0.0;</li>
+      <li><b>Травень 2016</b> Інтеграція з Mac App Store;</li>
+      <li><b>Серпень 2016</b> Підтримка Windows Store;</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Швидкий початок</h2>
+
+  <section>
+    <h3>Hello World</h3>
+
+    <pre><code class="javascript" data-trim>
+# Клонуємо репозиторій
+$ git clone https://github.com/electron/electron-quick-start
+# Змінюємо папку
+$ cd electron-quick-start
+# Встановлюємо залежності
+$ npm install
+# Запускаємо аплікацію
+$ npm start
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Структура</h3>
+
+    <pre><code class="javascript" data-trim>
+your-app/
+├── package.json
+├── main.js
+└── index.html
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>package.json</h3>
+
+    <pre><code class="javascript" data-trim>
+{
+  "name"    : "your-app",
+  "version" : "0.1.0",
+  "main"    : "main.js"
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>main.js (import)</h3>
+
+    <pre><code class="javascript" data-trim>
+const {app, BrowserWindow} = require('electron')
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>main.js (createWindow)</h3>
+
+    <pre><code class="javascript" data-trim>
+let win
+function createWindow() {
+  win = new BrowserWindow({width: 800, height: 600})
+
+  win.loadURL(`file://${__dirname}/index.html`);
+
+  win.webContents.openDevTools()
+
+  win.on('closed', () =&gt; {
+    win = null
+  })
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>main.js (entry point)</h3>
+
+    <pre><code class="javascript" data-trim>
+app.on('ready', createWindow)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>main.js (OSX)</h3>
+
+    <pre><code class="javascript" data-trim>
+app.on('window-all-closed', () =&gt; {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
+app.on('activate', () =&gt; {
+  if (win === null) {
+    createWindow()
+  }
+})
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>index.html</h3>
+
+    <pre><code class="javascript" data-trim>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Hello World!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Запуск</h3>
+
+    <pre><code class="javascript" data-trim>
+$ electron .
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+$ node_modules/.bin/electron .
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Інтеграція з ОС</h2>
+
+  <section>
+    <h3>Нещодавні документи (Windows)</h3>
+
+    <img src="images/windows-recent-files.png" />
+  </section>
+
+  <section>
+    <h3>Задачі (Windows)</h3>
+
+    <img src="images/windows-tasks.png" />
+  </section>
+
+  <section>
+    <h3>Попередній перегляд (Windows)</h3>
+
+    <img src="images/windows-thumbnail-toolbar.png" />
+  </section>
+
+  <section>
+    <h3>Прогрес (Windows)</h3>
+
+    <img src="images/windows-progress-bar.png" />
+  </section>
+
+  <section>
+    <h3>Статус (Windows)</h3>
+
+    <img src="images/windows-icon-overlays.png" />
+  </section>
+
+  <section>
+    <h3>Нещодавні документи (OSX)</h3>
+
+    <img src="images/osx-recent-files.png" />
+  </section>
+
+  <section>
+    <h3>Док (OSX)</h3>
+
+    <img src="images/osx-dock.png" />
+  </section>
+
+  <section>
+    <h3>Поточний файл (OSX)</h3>
+
+    <img src="images/osx-represented-file.png" />
+  </section>
+
+  <section>
+    <h3>Дії (Linux)</h3>
+
+    <img src="images/linux-launcher.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Можливості</h2>
+
+  <section>
+    <h3>Інтеграція</h3>
+
+    <ul>
+      <li>Повідомлення (Notifications)</li>
+      <li>Комбінації клавіш (Keyboard Shortcuts)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Операційна система</h3>
+
+    <ul>
+      <li>Вікна (Windows), Діалоги (Dialogs), Безрамкові вікна (Frameless)</li>
+      <li>Меню (Menu)</li>
+      <li>Доступність (Accessibility)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Буфер обміну (Clipboard)</h3>
+
+    <ul>
+      <li>Image</li>
+      <li>HTML</li>
+      <li>RTF</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Низькорівневі</h3>
+
+    <ul>
+      <li>Файлова система (Filesystem)</li>
+      <li>Монітор живлення (Power Monitor)</li>
+      <li>Багатопоточність (Multithreading)</li>
+      <li>Відладка (Debugging)</li>
+      <li>Оболонка (Shell)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Доступ до мережі</h3>
+
+    <ul>
+      <li>Монітор доступу до мережі</li>
+      <li>Відсутність Same-origin policy</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Додаткові</h3>
+
+    <ul>
+      <li>Автооновлення (Auto Updater)</li>
+      <li>Звітування про помилки (Crash Reporting)</li>
+      <li>Візуалізація у пам'яті (Offscreen Rendering)</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Тестування</h2>
+
+  <section>
+    <h3>spectron</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install --save-dev spectron
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>spectron</h3>
+
+    <pre><code class="javascript" data-trim>
+var Application = require('spectron').Application
+var assert = require('assert')
+
+var app = new Application({
+  path: '/Applications/MyApp.app/Contents/MacOS/MyApp'
+})
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>spectron</h3>
+
+    <pre><code class="javascript" data-trim>
+app.start().then(function () {
+  return app.browserWindow.isVisible()
+}).then(function (isVisible) {
+  assert.equal(isVisible, true)
+}).then(function () {
+  return app.client.getTitle()
+}).then(function (title) {
+  assert.equal(title, 'My App')
+}).catch(function (error) {
+  console.error('Test failed', error.message)
+}).then(function () {
+  return app.stop()
+})
+    </code></pre>
+  </section>
+</section>
+
+
+<section>
+  <h2>Дистрибуція</h2>
+
+  <section>
+    <h3>Упаковка</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install -g asar
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Підготовка</h3>
+
+    <a href="https://github.com/electron/electron/releases">Завантажити дистрибутив</a>
+  </section>
+
+  <section>
+    <h3>Підготовка</h3>
+
+    <pre><code class="javascript" data-trim>
+electron/resources/app
+├── package.json
+├── main.js
+└── index.html
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+electron/Electron.app/Contents/Resources/app/
+├── package.json
+├── main.js
+└── index.html
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Підготовка</h3>
+
+    <ul>
+      <li>Переіменувати</li>
+      <li>Замінити іконку</li>
+      <li>Створити інсталятор</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Розповсюдження</h3>
+
+    <ul>
+      <li>Windows Store</li>
+      <li>Mac App Store</li>
+    </ul>
+  </section>
+</section>

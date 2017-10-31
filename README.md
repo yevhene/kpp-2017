@@ -24,7 +24,6 @@
       - Браузерні технології (HTML, CSS)
       - JavaScript HTML5 API
     - Матеріали:
-      - [План](lectures/02-browser.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/02-browser)
 3. API
     - Теми:
@@ -33,16 +32,13 @@
       - Стратегії автентификації (token, OAuth2)
       - Формати (CSV, XML, JSON)
     - Матеріали:
-      - [План](lectures/03-api.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/03-api)
 4. Контроль версій
     - Теми:
       - Основи систем контролю версій (git)
       - Хмарні сервіси контролю версій (github)
     - Матеріали:
-      - [План](lectures/04-git.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/04-git)
-
 5. Серверне оточення
     - Теми:
       - Основи node.js
@@ -52,13 +48,11 @@
       - REST
       - Хмарні інстурменти розробки
     - Матеріали:
-      - [План](lectures/05-node.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/05-node)
 6. Інтеграція компонентів за допомогою бази даних
     - Теми:
       - Документо-орієнтована база даних MongoDB
     - Матеріали:
-      - [План](lectures/06-db.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/06-db)
 7. Стандарт ECMAScript
     - Теми:
@@ -67,20 +61,21 @@
       - TC 39
       - Історія та розвиток
     - Матеріали:
-      - [План](lectures/07-ecma.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/07-ecma)
-
---- Ми тут ---
-
 8. Виробнича середа для API та компонентів
     - Теми:
       - Розгортування (deploy)
       - Хмарні сервіси (heroku)
       - Менеджери компонентів (foreman, pm2)
     - Матеріали:
-      - [План](lectures/08-production.md)
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/08-production)
+
+--- Ми тут ---
+
 9. Оточення для настільних аплікацій electron
+    - Матеріали:
+      - [Слайди](https://vntu-kpp.herokuapp.com/slides/09-electron)
+
 10. Інтеграція компонентів за допомогою брокера повідомлень Redis
 11. Тестування та стандарти якості
     - Теми:
@@ -97,7 +92,6 @@
       - generators
       - async
       - Фреймворк koa.js
-
 13. Оточення для мобільних аплікацій (cordova)
 14. Інтеграція компонентів за допомогою брокера черг RabbitMQ
 15. Мікросервісна архітектура (docker)
