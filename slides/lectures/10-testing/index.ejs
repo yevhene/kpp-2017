@@ -1,0 +1,541 @@
+<section>
+  <h1>Тестування та стандарти якості</h1>
+  <h2>Лекція 10</h2>
+</section>
+
+<section>
+  <h2>Стандартизація якості</h2>
+</section>
+
+<section>
+  <h2>Статичний аналіз коду</h2>
+
+  <section>
+    <ul>
+      <li>Стиль та форматування</li>
+      <li>Перевірка на механічні помилки</li>
+      <li>Попередження проблем з продуктивністю</li>
+      <li>Попередження популярних помилок</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>eslint</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install --save-dev eslint
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад роботи</h3>
+
+    <pre><code class="javascript" data-trim>
+/home/yevhene/work/euro-taxi-server/model/Account.js
+  8:23  error  Parsing error: Unexpected token, expected ,
+
+   6 |         limit: {
+   7 |             type: DataTypes.INTEGER,
+&gt;  8 |             allowNull false,
+     |                       ^
+   9 |             defaultValue: 0
+  10 |         },
+  11 |         comment: {
+
+✖ 1 problem (1 error, 0 warnings)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Налаштування</h3>
+
+    <pre><code class="javascript" data-trim>
+        "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "no-trailing-spaces": "error",
+        "no-tabs": "error",
+        "yoda": ["error", "never"],
+        "no-with": "error",
+        "quotes": ["error", "single", {
+            "avoidEscape": true,
+            "allowTemplateLiterals": true
+        }],
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Розповсюджені конфігурації</h3>
+
+    <ul>
+      <li>Airbnb</li>
+      <li>Canonical</li>
+      <li>Facebook</li>
+      <li>Google</li>
+      <li>Shopify</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Сервіси</h3>
+
+    <ul>
+      <li>codeclimate.com</li>
+      <li>pullreview.com</li>
+      <li>codacy.com</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Перевірки</h2>
+
+  <section>
+    <h3>Пошук дуплікацій</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install --save-dev jscpd
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>jscpd</h3>
+
+    <img src="images/lint-jscpd.png" />
+  </section>
+
+  <section>
+    <h3>Пошук вразливостей</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install --save-dev retire
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>retire</h3>
+
+    <pre><code class="javascript" data-trim>
+brace-expansion 1.1.6 has known vulnerabilities:
+severity: medium;
+summary: brace-expansion_redos;
+https://nodesecurity.io/advisories/338
+euro-taxi 1.5.8
+↳ npmi 2.0.1
+ ↳ npm 3.10.10
+  ↳ fstream 1.0.10
+   ↳ rimraf 2.5.4
+    ↳ glob 7.1.0
+     ↳ minimatch 3.0.3
+      ↳ brace-expansion 1.1.6
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Сервіси</h3>
+
+    <ul>
+      <li>snyk.io</li>
+      <li>sourceclear.com</li>
+      <li>nodesecurity.io</li>
+      <li>acunetix.com</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Тестування</h2>
+
+  <section>
+    <h3>Види</h3>
+
+    <ul>
+      <li><b>White Box</b> (unit, functional)</li>
+      <li><b>Black Box</b> (integration, acceptance)</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Тестування (White Box)</h2>
+
+  <section>
+    <h3>Інструменти</h3>
+
+    <ul>
+      <li>mocha (chai)</li>
+      <li>jest</li>
+      <li>jasmine</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>mocha</h3>
+
+    <pre><code class="javascript" data-trim>
+require('mocha');
+
+var assert = require('assert');
+
+describe('math', function() {
+  it('works', function() {
+      assert.equal(2 + 2, 4);
+  });
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Генератори даних (faker)</h3>
+
+    <pre><code class="javascript" data-trim>
+faker.phone.phoneNumber() #=&gt; "+380931234567"
+faker.lorem.word() #=&gt; "ipsum"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Фабрики (factory-girl)</h3>
+
+    <pre><code class="javascript" data-trim>
+'use strict';
+
+const faker = require('faker');
+
+const model = require('../../model');
+const User = model.User;
+
+module.exports = function(factory) {
+    factory.define('user', User, {
+        phoneNumber: () =&gt; faker.phone.phoneNumber(),
+        code: faker.lorem.word(),
+        accountId: factory.assoc('account', 'id')
+    });
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+require('co-mocha');
+
+const faker = require('faker');
+const factory = require('../factories');
+const expect = require('chai').expect;
+
+const model = require('../../model');
+const User = model.User;
+const Payment = model.Payment;
+
+describe('User', function() {
+  beforeEach(function *() {
+    this.user = yield factory.create('user');
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+  describe('.applyPayment', function() {
+    beforeEach(function *() {
+      this.sum = faker.random.number(1000) + 1;
+
+      this.card = yield factory.create('card', {
+        userId: this.user.id
+      });
+    });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+    it('creates payment', function *() {
+      yield User.applyPayment(this.card, this.sum);
+
+      const payment = yield Payment.findOne({ where: {
+          cardId: this.card.id
+      } });
+
+      expect(payment.sum).to.eq(this.sum);
+    });
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Тестування (Black Box)</h2>
+
+  <section>
+    <h3>Інструменти</h3>
+
+    <ul>
+      <li>nightwatch</li>
+      <li>WebdriverIO</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>nightwatch</h3>
+
+    <pre><code class="javascript" data-trim>
+module.exports = {
+  'Demo test Google' : function (browser) {
+    browser
+      .url('http://www.google.com')
+      .waitForElementVisible('body', 1000)
+      .setValue('input[type=text]', 'nightwatch')
+      .waitForElementVisible('button[name=btnG]', 1000)
+      .click('button[name=btnG]')
+      .pause(1000)
+      .assert.containsText('#main', 'Night Watch')
+      .end();
+  }
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Драйвери</h3>
+
+    <ul>
+      <li>Selenium</li>
+      <li>PhantomJS</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Тестування (Покриття)</h2>
+
+  <section>
+    <h3>Інструменти</h3>
+
+    <ul>
+      <li>istanbul</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <img src="images/test-coverage-istanbul.png" />
+  </section>
+
+  <section>
+    <h3>Сервіси</h3>
+
+    <ul>
+      <li>codecov.io</li>
+    </ul>
+    <br />
+
+    <img src="images/test-coverage-codecov.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Тестування (Мутації)</h2>
+
+  <section>
+    <h3>Інструменти</h3>
+
+    <ul>
+      <li>stryker</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+function isUserOldEnough(user) {
+  return user.age &gt;= 18;
+}
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+/* 1 */ return user.age &gt; 18;
+/* 2 */ return user.age &lt; 18;
+/* 3 */ return false;
+/* 4 */ return true;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+  Mutant killed!
+  /yourPath/yourFile.js: line 10:27
+  Mutator: BinaryOperator
+  -                 return user.age >= 18;
+  +                 return user.age > 18;
+
+  Mutant survived!
+  /yourPath/yourFile.js: line 10:27
+  Mutator: RemoveConditionals
+  -                 return user.age >= 18;
+  +                 return true;
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Continuous Integration</h2>
+
+  <section>
+    <h3>Неперервна інтеграція</h3>
+  </section>
+
+  <section>
+    <h3>Інструменти</h3>
+
+    <ul>
+      <li>Jenkins</li>
+      <li>Teamcity</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Сервіси</h3>
+
+    <ul>
+      <li>circleci.com</li>
+      <li>semaphoreci.com</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Налаштування</h3>
+
+    <pre><code class="javascript" data-trim>
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/node:4.8.2
+      - image: mongo:3.4.4
+    steps:
+      - checkout
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Налаштування (Continuous Delivery)</h3>
+
+    <pre><code class="javascript" data-trim>
+  build:
+    docker:
+      - image: circleci/node:4.8.2
+      - image: mongo:3.4.4
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Інтеграція з GitHub</h3>
+
+    <img src="images/github-ci-integration.png">
+  </section>
+</section>
+
+<section>
+  <h2>Документація</h2>
+
+  <section>
+    <h3>Інструменти</h3>
+
+    <ul>
+      <li>ESDoc</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+/**
+ * this is MyClass.
+ */
+export default class MyClass {
+  /**
+   * @param {number} a - this is a value.
+   * @param {number} b - this is a value.
+   * @return {number} result of the sum value.
+   */
+  sum(a, b){
+    return a + b;
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Результат</h3>
+
+    <img src="images/esdoc-output.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Контроль в реальному часі</h2>
+
+  <section>
+    <h3>Контроль помилок</h3>
+
+    <ul>
+      <li>sentry.io</li>
+      <li>airbrake.io</li>
+      <li>honeybadger.io</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Збір інформації</h3>
+
+    <ul>
+      <li>mixpanel.com</li>
+      <li>appanalytics.io</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Моніторинг стану</h3>
+
+    <ul>
+      <li>newrelic.com</li>
+      <li>rollbar.com</li>
+    </ul>
+  </section>
+</section>
