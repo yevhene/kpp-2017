@@ -4,7 +4,7 @@
 [Питання](docs/quiz-first.md)
 
 ## Лабораторні
-Звіти за лабораторних подаються через [форму](https://docs.google.com/forms/d/e/1FAIpQLSd6x9ZNckW6PJsIM8yY633hvEAKEOXBC7rneKatZlnam4Xgww/viewform).
+Звіти до лабораторних подаються через [форму](https://docs.google.com/forms/d/e/1FAIpQLSd6x9ZNckW6PJsIM8yY633hvEAKEOXBC7rneKatZlnam4Xgww/viewform).
 Також в тестовому режимі працює система прийому лабораторних [novel.university](http://novel.university).
 
 1. [Браузерна аплікація](labs/01-browser.md)
