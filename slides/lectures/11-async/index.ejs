@@ -1,0 +1,757 @@
+<section>
+  <h1>Асинхронність JavaScript</h1>
+  <h2>Лекція 11</h2>
+</section>
+
+<section>
+  <h2>Поняття</h2>
+
+  <section>
+    <h2>Паралелізм (Parallelism)</h2>
+
+    <p>Коли декілька задач можуть виконуватись повністю одночасно. (Наприклад: на багатоядерному процессорі)</p>
+  </section>
+
+  <section>
+    <h2>Конкуренція (Concurrency)</h2>
+
+    <p>Коли декілька задач можуть виконуватись у різні проміжки часу, що можуть перемішуватись між собою. Вони можуть перекриватись або ні.</p>
+  </section>
+</section>
+
+<section>
+  <h2>Застосування</h2>
+
+  <section>
+    <h3>Передня частина (Front-end)</h3>
+
+    <p>Одночасна обробка декількох задач.</p>
+  </section>
+
+  <section>
+    <h3>Задня частина (Back-end)</h3>
+
+    <p>Одночасна обробка декількох запитів.</p>
+
+    <ul>
+      <li>PHP - залежить від Web-серверу;</li>
+      <li>Java - залежить від каркасу;</li>
+      <li>Ruby, Python - галудження (fork);</li>
+      <li>Erlang, Elixir - зелені потоки (green threads);</li>
+      <li>JavaScript - асинхронність.</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Асинхронність</h2>
+
+  <section>
+    <h3>Швидке перемикання контексту</h3>
+
+    <img src="images/asynchronicity.svg" />
+  </section>
+
+  <section>
+    <h3>Цикл подій (Event loop)</h3>
+
+    <pre><code class="javascript" data-trim>
+while (queue.waitForMessage()){
+  queue.processNextMessage();
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>JavaScript асинхронний</h3>
+
+    <ul>
+      <li><b>В Брузері</b> - оскільки JS виконується в один поток, будь який код що виконується <b>блокує інтерфейс користувача</b>.</li>
+      <li><b>В Node.js</b> - оскільки JS виконується в один поток, будь який код що виконується <b>блокує обробку інших запитів</b>.</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Зворотні виклики (callbacks)</h2>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+function userAddress(req, res) {
+  User.findById(req.userId, function(err, user) {
+    Address.findById(user.addressId, function(err, address) {
+      var opts = { address: address };
+      jade.renderFile('address.jade', opts, function(err, html) {
+          res.send(html);
+      });
+    });
+  });
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Розширений приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+function placesNearby(req, res) {
+  User.findById(req.userId, function(err, user) {
+    Address.findById(user.addressId, function(err, address) {
+      User.near(address).findAll(function(err, users) {
+        Place.near(address).findAll(function(err, places) {
+          var opts = {
+            address: address, users: users, places: places
+          };
+          jade.renderFile('address.jade', opts, function(err, html) {
+              res.send(html);
+          });
+        });
+      });
+    });
+  });
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Піраміда Приречених <br />(Pyramid of Doom)</h3>
+
+    <img src="images/pyramid-of-doom.png" />
+  </section>
+
+  <section>
+    <h3>Розширений приклад з обробкою помилок</h3>
+
+    <pre><code class="hljs" data-trim>
+function placesNearbyOrError(req, res) {
+  User.findById(req.userId, function(err, user) {
+    if (err) {
+      res.send('Error ' + err.toString());
+      return;
+    }
+
+    Address.findById(user.addressId, function(err, address) {
+      if (err) {
+        res.send('Error ' + err.toString());
+        return;
+      }
+
+      User.near(address).findAll(function(err, users) {
+        if (err) {
+          res.send('Error ' + err.toString());
+          return;
+        }
+
+        Place.near(address).findAll(function(err, places) {
+          if (err) {
+            res.send('Error ' + err.toString());
+            return;
+          }
+          var opts = {
+            address: address, users: users, places: places
+          };
+          jade.renderFile('address.jade', opts, function(err, html) {
+            if (err) {
+              res.send('Error ' + err.toString());
+              return;
+            }
+            res.send(html);
+          });
+        });
+      });
+    });
+  });
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Переваги/Недоліки</h3>
+
+    <ul>
+      <li>+ Простота</li>
+      <li>+ Доступність</li>
+      <li>- Піраміда Приречених</li>
+      <li>- Обробка помилок</li>
+      <li>- Незручний хід виконання коду</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Обіцянки (Promises)</h2>
+
+  <section>
+    <h3>Definition</h3>
+
+    <p><b>Обіцянка (Promise)</b> об'єкт що використовується для асинхронних обрахунків. Він представляє значення, що може біти доступне зараз, або у майбутньому, або ніколи.</p>
+
+    <pre><code class="hljs" data-trim>
+new Promise( /* executor */ function(resolve, reject) { ... } );
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="hljs" data-trim>
+function userAddress(req, res) {
+  User
+    .findById(req.userId)
+    .then(user =&gt; Address.findById(user.addressId))
+    .then(address =&gt; jade.renderFile('address.jade', { address }))
+    .then(html =&gt; res.send(html));
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Розширений приклад</h3>
+
+    <pre><code class="hljs" data-trim>
+function placesNearby(req, res) {
+  User
+    .findById(req.userId)
+    .then(user =&gt; Address.findById(user.addressId))
+    .then(address =&gt; Promise.all([
+      Promise.resolve(address),
+      User.near(address).findAll(),
+      Place.near(address).findAll()
+    ]))
+    .then([address, users, places] =&gt;
+      renderFile('address.jade', { address, users, places })
+    )
+    .then(html =&gt; res.send(html));
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Розширений приклад з обробкою помилок</h3>
+
+    <pre><code class="hljs" data-trim>
+function placesNearbyOrError(req, res) {
+  User
+    .findById(req.userId)
+    .then(user =&gt; Address.findById(user.addressId))
+    .then(address =&gt; Promise.all([
+      Promise.resolve(address),
+      User.near(address).findAll(),
+      Place.near(address).findAll()
+    ]))
+    .then([address, users, places] =&gt;
+      renderFile('address.jade', { address, users, places})
+    )
+    .then(html =&gt; res.send(html))
+    .catch(err =&gt; res.send('Error' + err.toString()));
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Обгортування звортнього виклику</h3>
+
+    <pre><code class="hljs" data-trim>
+function renderFile(file, opts) {
+  return new Promise(function(resolve, reject) {
+    jade.renderFile(file, opts, function(err, html) {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve(html);
+    });
+  });
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Обіцянофікація</h3>
+
+    <pre><code class="hljs" data-trim>
+const renderFile = promissify(jade.renderFile);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Переваги/Недоліки</h3>
+
+    <ul>
+      <li>+ Майже звичний хід виконання</li>
+      <li>+ Проста обробка помилок</li>
+      <li>+ Гілки виконання</li>
+      <li>- Все ж таки не дуже звичний хід виконання</li>
+      <li>- Область видимості</li>
+      <li>- Помилки не завжди оброблюються</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Генератори</h2>
+
+  <section>
+    <h3>Ітератори</h3>
+
+    <pre><code class="hljs" data-trim>
+const array = [1, 2, 3];
+const newIterator = array[Symbol.iterator];
+const iterator = newIterator();
+iterator.next() //=&gt; {value: 1, done: false}
+iterator.next() //=&gt; {value: 2, done: false}
+iterator.next() //=&gt; {value: 3, done: false}
+iterator.next() //=&gt; {value: undefined, done: true}
+const iterator1 = newIterator();
+iterator1.next() //=&gt; {value: 1, done: false}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Ітератори (for..of)</h3>
+
+    <pre><code class="hljs" data-trim>
+const array = [1, 2, 3];
+for (let e in array) {
+  console.log(e);
+}
+//&gt;1
+//&gt;2
+//&gt;3
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Протоколи Ітераторів</h3>
+
+    <pre><code class="hljs" data-trim>
+interface Iterable {
+    [Symbol.iterator]() : Iterator;
+}
+interface Iterator {
+    next() : IteratorResult;
+    return?(value? : any) : IteratorResult;
+}
+interface IteratorResult {
+    value : any;
+    done : boolean;
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Генерація значень</h3>
+
+    <pre><code class="hljs" data-trim>
+// Функція генератор
+function *seq() {
+  let n = 1;
+  yield n++;
+  yield n++;
+}
+
+const a = seq(); //=&gt; Об'єкт генератор (похідний від Iterator)
+const b = seq(); //=&gt; Об'єкт генератор (похідний від Iterator)
+a.next(); //=&gt; {value: 1, done: false}
+a.next(); //=&gt; {value: 2, done: false}
+b.next(); //=&gt; {value: 1, done: false}
+a.next(); //=&gt; {value: undefined, done: true}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Обробка вкладених генераторів</h3>
+
+    <pre><code class="hljs" data-trim>
+function *neg() {
+  yield -1;
+  yield -2;
+}
+
+function *seq() {
+  yield* neg();
+  yield* [1, 2];
+}
+
+const a = seq(); //=&gt; Об'єкт генератор
+a.next(); //=&gt; {value: -1, done: false}
+a.next(); //=&gt; {value: -2, done: false}
+a.next(); //=&gt; {value: 1, done: false}
+a.next(); //=&gt; {value: 2, done: false}
+a.next(); //=&gt; {value: undefined, done: true}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Кінцева генерація значень</h3>
+
+    <pre><code class="hljs" data-trim>
+function *seq() {
+  let n = 1;
+  yield n++;
+  yield n++;
+  return n;
+}
+
+const a = seq(); //=&gt; Об'єкт генератор
+a.next(); //=&gt; {value: 1, done: false}
+a.next(); //=&gt; {value: 2, done: false}
+a.next(); //=&gt; {value: 3, done: true}
+a.next(); //=&gt; {value: undefined, done: true}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Підстановка значень</h3>
+
+    <pre><code class="hljs" data-trim>
+function *seq(n = 1) {
+  while (true) {
+    n += (yield n) || 1;
+  }
+}
+
+const a = seq(17); //=&gt; Об'єкт генератор
+a.next(/* все одно */); //=&gt; {value: 17, done: false}
+a.next(); //=&gt; {value: 18, done: false}
+a.next(8); //=&gt; {value: 26, done: false}
+a.next(); //=&gt; {value: 27, done: false}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Підстановка повернення значень</h3>
+
+    <pre><code class="hljs" data-trim>
+function *seq(n = 1) {
+  while (true) {
+    n += (yield n) || 1;
+  }
+}
+
+const a = seq(17); //=&gt; Об'єкт генератор
+a.next(/* все одно */); //=&gt; {value: 17, done: false}
+a.next(); //=&gt; {value: 18, done: false}
+a.next(8); //=&gt; {value: 26, done: false}
+a.next(); //=&gt; {value: 27, done: false}
+a.return(7) //=&gt; {value: 7, done: true}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Підстановка помилок</h3>
+
+    <pre><code class="hljs" data-trim>
+function *seq(n) {
+  try {
+    yield n;
+  } catch (e) {
+    yield e;
+  }
+}
+
+const a = seq(17); // => Об'єкт генератор
+a.next(); // => {value: 17, done: false}
+a.throw(4); // => {value: 4, done: false}
+a.next(); // => {value: undefined, done: true}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Протоколи Генераторів</h3>
+
+    <pre><code class="hljs" data-trim>
+interface Generator {
+    next(value? : any) : IteratorResult;
+    throw(value? : any) : IteratorResult;
+    return(value? : any) : IteratorResult;
+}
+interface IteratorResult {
+    value : any;
+    done : boolean;
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Виконувач (Runner)</h3>
+
+    <ul>
+      <li>Розгортає генератор до кінця;</li>
+      <li>Якщо генерується просте значення просто повертає його назад;</li>
+      <li>Якщо генерується функція, вона виконується, результат розгортується до простого значення і повертається назад;</li>
+      <li>Якщо генерується обіцянка, очікується на її вирішення, підставляється або значення або помилка (обіцянка розгортується сама за визначенням);</li>
+      <li>Якщо генерується інший генератор, він розгортується за тими ж правилами.</li>
+    </ul>
+
+    <pre><code class="hljs" data-trim>
+co(seq())
+  .then(function(value) {
+    console.log(value);
+  }, function(err) {
+    console.error(err.stack);
+  });
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="hljs" data-trim>
+function *userAddress(req, res) {
+  const user = yield User.findById(req.userId);
+  const address = yield Address.findById(user.addressId);
+
+  const html = yield jade.renderFile('address.jade', { address }));
+  res.send(html);
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Розширений приклад</h3>
+
+    <pre><code class="hljs" data-trim>
+function *placesNarby(req, res) {
+  const user = yield User.findById(req.userId);
+  const address = yield Address.findById(user.addressId);
+
+  const [users, places] = yield Promise.all([
+    User.near(address).findAll(),
+    Place.near(address).findAll()
+  ]));
+
+  const html = yield jade.renderFile('address.jade', {
+    address, users, places
+  }));
+  res.send(html);
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Розширений приклад з обробкою помилок</h3>
+
+    <pre><code class="hljs" data-trim>
+function *placesNearbyOrError(req, res) {
+  try {
+    const user = yield User.findById(req.userId);
+    const address = yield Address.findById(user.addressId);
+    const [users, places] = yield Promise.all([
+      User.near(address).findAll(),
+      Place.near(address).findAll()
+    ]))
+
+    const html = yield jade.renderFile('address.jade', {
+      address, users, places
+    }));
+    res.send(html));
+  } catch (e) {
+    res.send('Error' + err.toString()));
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Переваги/Недоліки</h3>
+
+    <ul>
+      <li>+ Всі бонуси обіцянок</li>
+      <li>+ Природний хід виконання</li>
+      <li>+ Знову можна використовувати try-catch</li>
+      <li>- Це сложна</li>
+      <li>- Це хак</li>
+      <li>- Необхідна спеціальна функція - виконувач</li>
+    </ul>
+  </section>
+</section>
+
+
+<section>
+  <h2>Асинхронні функції</h2>
+
+  <section>
+    <p>Стандарт ECMAScript 2017. Node 7+</p>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="hljs" data-trim>
+async function userAddress(req, res) {
+  const user = await User.findById(req.userId);
+  const address = await Address.findById(user.addressId);
+
+  const html = await jade.renderFile('address.jade', { address }));
+  res.send(html));
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Використання</h3>
+
+    <pre><code class="hljs" data-trim>
+userAddress(req, res)
+  .then(/*...*/)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Переваги/Недоліки</h3>
+
+    <ul>
+      <li>+ Всі бонуси генераторів і обіцянок</li>
+      <li>+ Підтримка на рівні мови</li>
+      <li>- Важкі в тестуванні</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>В старих браузерах</h2>
+
+  <section>
+    <h3>Транспіляція (Babel)</h3>
+
+    <pre><code class="hljs" data-trim>
+function *seq() {
+  let n = yield 17;
+  yield 18 + n;
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Транспіляція (Babel)</h3>
+
+    <pre><code class="hljs" data-trim>
+"use strict";
+
+var _marked = [seq].map(regeneratorRuntime.mark);
+
+function seq() {
+  var n;
+  return regeneratorRuntime.wrap(function seq$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return 17;
+
+        case 2:
+          n = _context.sent;
+          _context.next = 5;
+          return 18 + n;
+
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked[0], this);
+}
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>koa.js</h2>
+
+  <section>
+    <h3>Простий приклад</h3>
+
+    <pre><code class="hljs" data-trim>
+const Koa = require('koa');
+const app = new Koa();
+
+app.use(async ctx =&gt; {
+  ctx.body = 'Hello World';
+});
+
+app.listen(3000);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Проміжні обробники (middleware)</h3>
+
+    <pre><code class="hljs" data-trim>
+const Koa = require('koa');
+const app = new Koa();
+
+// logger
+app.use(async (ctx, next) =&gt; {
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log(`${ctx.method} ${ctx.url} - ${ms}`);
+});
+
+// response
+app.use(async ctx =&gt; {
+  ctx.body = 'Hello World';
+});
+
+app.listen(3000);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Бібліотеки</h3>
+
+    <pre><code class="hljs" data-trim>
+const logger = require('koa-logger');
+const router = require('koa-router')();
+const koaBody = require('koa-body');
+
+const Koa = require('koa');
+const app = module.exports = new Koa();
+
+app.use(logger());
+app.use(render);
+app.use(koaBody());
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Маршрутизатор</h3>
+
+    <pre><code class="hljs" data-trim>
+router.get('/', list)
+  .get('/post/new', add)
+  .post('/post', create);
+
+app.use(router.routes());
+
+async function list(ctx) {
+  await ctx.render('list', { posts: posts });
+}
+
+async function show(ctx) {
+  const id = ctx.params.id;
+  const post = posts[id];
+  if (!post) ctx.throw(404, 'invalid post id');
+  await ctx.render('show', { post: post });
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Пакети</h3>
+
+    <a href="https://github.com/koajs/koa/wiki">https://github.com/koajs/koa/wiki</a>
+  </section>
+</section>
+
+<section>
+  <h2>Література</h2>
+
+  <ul>
+    <li><a href="http://exploringjs.com/es6/">http://exploringjs.com/es6/</a></li>
+  </ul>
+</section>
