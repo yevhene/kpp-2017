@@ -1,0 +1,541 @@
+<section>
+  <h1>Redis</h1>
+  <h2>Лекція 12</h2>
+</section>
+
+<section>
+  <h2>Redis</h2>
+
+  <section>
+    <h3>Redis (remote dictionary server) - програма, з відкритим кодом, для збереження структур даних в пам'яті, що використовується, як база даних, кеш або брокер повідомлень.</h3>
+
+    <p>Класифікують, як базу даних ключ-значення (key-value database)</p>
+  </section>
+
+  <section>
+    <h3>Інсталяція</h3>
+
+    <pre><code class="javascript" data-trim>
+$ sudo apt install redis-server
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Консоль</h3>
+
+    <pre><code class="javascript" data-trim>
+$ redis-cli
+127.0.0.1:6379&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Автодоповнення</h3>
+
+    <img src="images/redis-prompt.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Основні операції</h2>
+
+  <section>
+    <h3>SET</h3>
+
+    <p>Асоціація значення з ключем</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SET mykey "Hello"
+"OK"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>GET</h3>
+
+    <p>Отримання значення за ключем</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; GET nonexisting
+(nil)
+redis&gt; SET mykey "Hello"
+"OK"
+redis&gt; GET mykey
+"Hello"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Опції SET</h3>
+
+    <ul>
+      <li><b>EX seconds</b> - час існування ключа в секундах;</li>
+      <li><b>PX milliseconds</b> - час існування ключа в мілісекундах;</li>
+      <li><b>NX</b> - тільки, якщо ключа ще не існує;</li>
+      <li><b>XX</b> - тільки, якщо ключ вже існує.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>DEL</h3>
+
+    <p>Видалення ключа</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SET key1 "Hello"
+"OK"
+redis&gt; SET key2 "World"
+"OK"
+redis&gt; DEL key1 key2 key3
+(integer) 2
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>KEYS</h3>
+
+    <p>Список ключів</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; MSET firstname Jack lastname Stuntman age 35
+"OK"
+redis&gt; KEYS *name*
+1) "firstname"
+2) "lastname"
+redis&gt; KEYS a??
+1) "age"
+redis&gt; KEYS *
+1) "firstname"
+2) "lastname"
+3) "age"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>EXISTS</h3>
+
+    <p>Перевірка ключа(ів) на існування</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; EXISTS anotherkey
+(integer) 0
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Складені ключі</h3>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SET user:23 '{"name": "user"}'
+"OK"
+redis&gt; GET user:23
+"{\"name\": \"user\"}"
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Тип: String</h2>
+
+  <section>
+    <h3>APPEND</h3>
+
+    <p>Приєднання до стрічки</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SET mykey "Hello"
+"OK"
+redis&gt; GET mykey
+"Hello"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>INCR/DECR/INCBY/DECRBY</h3>
+
+    <p>Інкремент/Декремент</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SET mykey "10"
+"OK"
+redis&gt; INCR mykey
+(integer) 11
+redis&gt; GET mykey
+"11"
+redis&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>GETRANGE/SETRANGE</h3>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SET mykey "This is a string"
+"OK"
+redis&gt; GETRANGE mykey 0 3
+"This"
+redis&gt; SETRANGE mykey 8 "letter"
+(integer) 19
+redis&gt; GET mykey
+"This is a letter"
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Тип: List (L)</h2>
+
+  <section>
+    <p>Список - набір впорядкованих, зв'язаних даних. Оптимальні для операцій що працюють з кінцями набору.</p>
+  </section>
+
+  <section>
+    <h3>LPUSH/LPOP</h3>
+
+    <p>Додавання та отримання елемента ліворуч</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; LPUSH mylist "world"
+(integer) 1
+redis&gt; LPUSH mylist "hello"
+(integer) 2
+redis&gt; LPOP mylist
+"hello"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>RPUSH/RPOP</h3>
+
+    <p>Додавання та отримання елемента праворуч</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; RPUSH mylist "world"
+(integer) 1
+redis&gt; RPUSH mylist "hello"
+(integer) 2
+redis&gt; RPOP mylist
+"hello"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>BLPOP/BRPOP</h3>
+
+    <p>Блокуюче отримання елемента</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; BLPOP list1 list2 list3 0
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>RPOPLPUSH</h3>
+
+    <p>Атомарне отримання елемента з одного списку і запис до іншого</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; RPOPLPUSH mylist myotherlist
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Інші операції</h3>
+
+    <ul>
+      <li><b>LLEN</b> - розмір</li>
+      <li><b>LINDEX</b> - елемент по індексу</li>
+      <li><b>LRANGE</b> - список елементів в діапазоні</li>
+      <li><b>LREM</b> - видалення елемента</li>
+      <li><b>LINSERT</b> - вставка елемента</li>
+      <li><b>LSET</b> - заміна елемента</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Тип: Set (S)</h2>
+
+  <section>
+    <p>Список - набір невпорядкованих стрічок. Оптимальні для коли не важливий порядок даних або необхідно контролювати унікальність.</p>
+  </section>
+
+  <section>
+    <h3>SADD</h3>
+
+    <p>Додавання елементів</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SADD myset "Hello"
+(integer) 1
+redis&gt; SADD myset "World"
+(integer) 1
+redis&gt; SADD myset "World"
+(integer) 0
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>SMEMBERS</h3>
+
+    <p>Отримання елементів набору</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; SMEMBERS myset
+1) "World"
+2) "Hello"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>SPOP</h3>
+
+    <p>Отримання випадкового елементу</p>
+
+    <pre><code class="javascript" data-trim>
+redis> SADD myset "one"
+(integer) 1
+redis> SADD myset "two"
+(integer) 1
+redis> SADD myset "three"
+(integer) 1
+redis> SPOP myset
+"three"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>SUNION/SINTER/SDIFF</h3>
+
+    <p>Операції з наборами</p>
+
+    <pre><code class="javascript" data-trim>
+redis> SADD key1 "a"
+(integer) 1
+redis> SADD key1 "b"
+(integer) 1
+redis> SADD key2 "b"
+(integer) 1
+redis> SADD key2 "c"
+(integer) 1
+redis> SINTER key1 key2
+1) "b"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Інші операції</h3>
+
+    <ul>
+      <li><b>SCARD</b> - розмір;</li>
+      <li><b>SSCAN</b> - перебір елементів за шаблоном.</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Тип: Hashes (H)</h2>
+
+  <section>
+    <p>Хеш (мапа, словник) - набір ключів і значень. Оптимальні для збереження об'єктів, з якими необхідно працювати в Redis.</p>
+  </section>
+
+  <section>
+    <h3>HSET</h3>
+
+    <p>Встановлення значення</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; HSET user:1001 password 12345
+(integer) 1
+redis&gt; HSET user:1001 password 12345
+(integer) 0
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>HMSET</h3>
+
+    <p>Встановлення декількох значень</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; HMSET user:1000 username antirez password P1pp0 age 34
+OK
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>HGETALL</h3>
+
+    <p>Отримання всіх значень</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; HGETALL user:1000
+1) "username"
+2) "antirez"
+3) "password"
+4) "P1pp0"
+5) "age"
+6) "34"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Інші операції</h3>
+
+    <ul>
+      <li><b>HKEYS</b> - список ключів;</li>
+      <li><b>HLEN</b> - кількість ключів;</li>
+      <li><b>HEXISTS</b> - перевірка на існування;</li>
+      <li><b>HSCAN</b> - перебір ключів;</li>
+      <li><b>HDEL</b> - видалення.</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Тип: Sorted Sets (Z)</h2>
+
+  <section>
+    <p>Відсортований набір - набір строк, та їх jwsyjr (score). Оптимальні для створення черг з приорітетами. Елементи відсортовані в порядку зростання jwsyrb, та в лексикографічному порядку стрічок.</p>
+  </section>
+
+  <section>
+    <h3>ZADD</h3>
+
+    <p>Додавання елемента</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; zadd hackers 1940 "Alan Kay"
+(integer) 1
+redis&gt; zadd hackers 1957 "Sophie Wilson"
+(integer) 1
+redis&gt; zadd hackers 1953 "Richard Stallman"
+(integer) 1
+redis&gt; zadd hackers 1949 "Anita Borg"
+(integer) 1
+redis&gt; zadd hackers 1965 "Yukihiro Matsumoto"
+(integer) 1
+redis&gt; zadd hackers 1914 "Hedy Lamarr"
+(integer) 1
+redis&gt; zadd hackers 1916 "Claude Shannon"
+(integer) 1
+redis&gt; zadd hackers 1969 "Linus Torvalds"
+(integer) 1
+redis&gt; zadd hackers 1912 "Alan Turing"
+(integer) 1
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>ZRANGE</h3>
+
+    <p>Отримання набору елементів в діапазоні індексів</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; ZRANGE hackers 0 -1
+1) "Alan Turing"
+2) "Hedy Lamarr"
+3) "Claude Shannon"
+4) "Alan Kay"
+5) "Anita Borg"
+6) "Richard Stallman"
+7) "Sophie Wilson"
+8) "Yukihiro Matsumoto"
+9) "Linus Torvalds"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>ZRANGEBYSCORE</h3>
+
+    <p>Отримання набору елементів в діапазоні оцінок (score)</p>
+
+    <pre><code class="javascript" data-trim>
+redis&gt; ZRANGEBYSCORE hackers -inf 1950
+1) "Alan Turing"
+2) "Hedy Lamarr"
+3) "Claude Shannon"
+4) "Alan Kay"
+5) "Anita Borg"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Інші операції</h3>
+
+    <ul>
+      <li><b>ZREVRANGE</b> - Отримання набору елементів з іношого кінця;</li>
+      <li><b>ZREMRANGEBYSCORE</b> - видалення за оцінками;</li>
+      <li><b>ZSCAN</b> - перебір строк за шаблоном;</li>
+      <li><b>ZRANK</b> - визначення рангу елементу.</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Інтеграція з node.js</h2>
+
+  <section>
+    <pre><code class="javascript" data-trim>
+$ npm install --save node_redis
+    </code></pre>
+  </section>
+
+  <section>
+    <pre><code class="javascript" data-trim>
+var redis = require("redis"),
+    client = redis.createClient();
+
+// if you'd like to select database 3, instead of 0 (default), call
+// client.select(3, function() { /* ... */ });
+
+client.on("error", function (err) {
+    console.log("Error " + err);
+});
+
+client.set("string key", "string val", redis.print);
+client.hset("hash key", "hashtest 1", "some value", redis.print);
+client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
+client.hkeys("hash key", function (err, replies) {
+    console.log(replies.length + " replies:");
+    replies.forEach(function (reply, i) {
+        console.log("    " + i + ": " + reply);
+    });
+    client.quit();
+});
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Приклад</h2>
+
+  <section>
+    <h3>Задача</h3>
+
+    <ul>
+      <li>Є користувачі (users) та замовлення (orders);</li>
+      <li>Користувачі отримують повідомлення (messages), що пов'язані з замовленням;</li>
+      <li>З одним замовленням, може бути пов'язано багато повідомлень;</li>
+      <li>Кожен користувач має отримувати повідомлення з затримкою, якою можна керувати;</li>
+      <li>Система має можливість видалити всі повідомлення пов'язані з конкретним замовленням.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Вирішення</h3>
+
+    <pre><code class="javascript" data-trim>
+mid - orderId:messageId
+
+messageId notificationsLength::string
+
+messages [ mid: content ]::hash
+
+users [ mid: userId ]::hash
+
+queue [ (time) mid ]::zset
+    </code></pre>
+  </section>
+</section>
