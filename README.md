@@ -68,7 +68,9 @@
       - Менеджери компонентів (foreman, pm2)
     - Матеріали:
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/08-production)
-9. Оточення для настільних аплікацій electron
+9. Оточення для настільних аплікацій
+    - Теми:
+      - Electron
     - Матеріали:
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/09-electron)
 10. Тестування та стандарти якості
@@ -88,14 +90,17 @@
       - Фреймворк koa.js
     - Матеріали:
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/11-async)
-
---- Ми тут ---
-
 12. Брокер повідомлень Redis
     - Матеріали:
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/12-redis)
 
-13. Брокер черг RabbitMQ
-14. Оточення для мобільних аплікацій (cordova)
+--- Ми тут ---
+
+13. Оточення для мобільних аплікацій
+    - Теми:
+      - Apache Cordova
+    - Матеріали:
+      - [Слайди](https://vntu-kpp.herokuapp.com/slides/13-cordova)
+14. Брокер черг RabbitMQ
 15. Мікросервісна архітектура (docker)
 16. Історична ретроспектива підходів до розробки та інтеграції компонентів

@@ -1,0 +1,627 @@
+<section>
+  <h1>Cordova</h1>
+  <h2>Лекція 13</h2>
+</section>
+
+<section>
+  <h2>Cordova</h2>
+
+  <section>
+    <h3>Apache Cordova - інструментарій для розробки мобільних аплікацій, за допомогою HTML, CSS, JavaScript.</h3>
+  </section>
+
+  <section>
+    <h3>Інсталяція</h3>
+
+    <pre><code class="javascript" data-trim>
+$ npm install -g cordova
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Створення нової аплікації</h3>
+
+    <pre><code class="javascript" data-trim>
+$ cordova create mobileapp
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Платформи</h3>
+
+    <ul>
+      <li>android</li>
+      <li>blackberry10</li>
+      <li>ios</li>
+      <li>wp8 (Windows Phone 8)</li>
+      <li>ubuntu</li>
+      <li>windows (8.1, 10, Phone 8.1)</li>
+      <li>osx</li>
+      <li>browser</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Hello Browser</h2>
+
+  <section>
+    <h3>Додавання платформи</h3>
+
+    <pre><code class="javascript" data-trim>
+$ cordova platform add browser
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Запуск</h3>
+
+    <pre><code class="javascript" data-trim>
+$ cordova run browser
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Результат</h3>
+
+    <img src="images/cordova-browser.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Hello Android</h2>
+
+  <section>
+    <h3>Додавання платформи</h3>
+
+    <pre><code class="javascript" data-trim>
+$ cordova platform add android
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Запуск</h3>
+
+    <pre><code class="javascript" data-trim>
+$ cordova run android
+    </code></pre>
+
+    <pre class="fragment"><code class="javascript" data-trim>
+Error: Failed to find 'ANDROID_HOME' environment variable. Try setting setting it manually.
+Failed to find 'android' command in your 'PATH'. Try update your 'PATH' to include path to valid SDK directory.
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Інсталяція Java</h3>
+
+    <pre><code class="javascript" data-trim>
+$ sudo apt install default-jdk
+    </code></pre>
+
+    <i>Не забудьте встановити $JAVA_HOME</i>
+  </section>
+
+  <section>
+    <h3>Інсталяція Android Studio</h3>
+
+    <a href="https://developer.android.com/studio/install.html">https://developer.android.com/studio/install.html</a>
+
+    <br />
+    <i>Не забудьте встановити $ANDROID_HOME</i>
+  </section>
+
+  <section>
+    <h3>Інсталяція Android Sdk</h3>
+
+    <img src="images/cordova-android-install.png" />
+    <br />
+    <img src="images/cordova-android-install-tools.png" />
+  </section>
+
+  <section>
+    <h3>Створення емулятора</h3>
+
+    <img src="images/cordova-android-install-avd.png" />
+
+    <br />
+    <i>x86 рекомендується</i>
+  </section>
+
+  <section>
+    <h3>Результат</h3>
+
+    <img src="images/cordova-android.png" />
+  </section>
+
+  <section>
+    <h3>Реліз</h3>
+
+    <pre><code class="javascript" data-trim>
+$ cordova build --release android
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Події</h2>
+
+  <section>
+    <h3>deviceready</h3>
+
+    <pre><code class="javascript" data-trim>
+document.addEventListener('deviceready', onDeviceReady, false);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Приклад</h3>
+
+    <pre><code class="javascript" data-trim>
+function onDeviceReady() {
+    document.addEventListener("pause", onPause, false);
+    document.addEventListener("resume", onResume, false);
+    document.addEventListener("menubutton", onMenuKeyDown, false);
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Інші події</h3>
+
+    <img src="images/cordova-events.png" />
+  </section>
+</section>
+
+<section>
+  <h2>Конфігурація</h2>
+
+  <section>
+    <pre><code class="javascript" data-trim>
+app/config.xml
+    </code></pre>
+  </section>
+
+  <section>
+    <ul>
+      <li>Назва</li>
+      <li>Версія</li>
+      <li>Іконки</li>
+      <li>Дозволи</li>
+      <li>...</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Сховище</h2>
+
+  <section>
+    <h3>Local Storage</h3>
+
+    <pre><code class="javascript" data-trim>
+var storage = window.localStorage;
+var value = storage.getItem(key);
+storage.setItem(key, value);
+storage.removeItem(key);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>WebSQL</h3>
+
+    <pre><code class="javascript" data-trim>
+var db = window.openDatabase(
+  name, version, displayName, estimatedSize
+);
+var sql = 'SELECT * FROM users WHERE name = ?';
+var values = ['Vasyl'];
+
+db.transaction(function(tx) {
+    tx.executeSql(sql, values, function(tx, result) {
+        console.log(result);
+    }, function (error) {
+        console.log(error);
+    });
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>IndexedDB (Connection)</h3>
+
+    <pre><code class="javascript" data-trim>
+var db;
+var databaseName = 'myDB';
+var databaseVersion = 1;
+var openRequest = window.indexedDB.open(
+  databaseName, databaseVersion
+);
+
+openRequest.onerror = function (event) {
+  console.log(openRequest.errorCode);
+};
+
+openRequest.onsuccess = function (event) {
+  db = openRequest.result;
+  displayData();
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>IndexedDB (Creation/Upgradation)</h3>
+
+    <pre><code class="javascript" data-trim>
+openRequest.onupgradeneeded = function (event) {
+  var db = event.target.result;
+  db.onerror = function () {
+    console.log(db.errorCode);
+  };
+
+  var store = db.createObjectStore('customers', {
+    keyPath: 'customerId'
+  });
+...
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>IndexedDB (Indexing)</h3>
+
+    <pre><code class="javascript" data-trim>
+...
+  store.createIndex('firstName', 'firstName', { unique: false });
+  store.createIndex('lastName', 'lastName', { unique: false });
+...
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>IndexedDB (Populating)</h3>
+
+    <pre><code class="javascript" data-trim>
+...
+  store.transaction.oncomplete = function (event) {
+    var customerStore = db.transaction(
+      'customers', 'readwrite'
+    ).objectStore('customers');
+
+    customers.forEach(function (customer) {
+      customerStore.add(customer);
+    });
+  };
+};
+    </code></pre>
+  </section>
+
+
+  <section>
+    <h3>Плагіни</h3>
+
+    <ul>
+      <li>FileSystem API</li>
+      <li>SQLite Plugin</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Плагіни (Plugins)</h2>
+
+  <section>
+    <h3>Battery</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-battery-status
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+batterystatus
+batterycritical
+batterylow
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+window.addEventListener("batterystatus", onBatteryStatus, false);
+
+function onBatteryStatus(status) {
+  console.log(
+    "Level: " + status.level + " isPlugged: " + status.isPlugged
+  );
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Camera</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-camera
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+navigator.camera.getPicture(
+  cameraSuccess, cameraError, cameraOptions
+);
+
+function cameraSuccess(imageData) {
+   var image = document.getElementById('myImage');
+   image.src = "data:image/jpeg;base64," + imageData;
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Capture</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-media-capture
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+capture.captureAudio
+capture.captureImage
+capture.captureVideo
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Connection</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-network-information
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+function checkConnection() {
+  var networkState = navigator.connection.type;
+
+  var states = {};
+  states[Connection.UNKNOWN]  = 'Unknown connection';
+  states[Connection.ETHERNET] = 'Ethernet connection';
+  states[Connection.WIFI]     = 'WiFi connection';
+  states[Connection.CELL_2G]  = 'Cell 2G connection';
+  states[Connection.CELL_3G]  = 'Cell 3G connection';
+  states[Connection.CELL_4G]  = 'Cell 4G connection';
+  states[Connection.CELL]     = 'Cell generic connection';
+  states[Connection.NONE]     = 'No network connection';
+
+  alert('Connection type: ' + states[networkState]);
+}
+
+checkConnection();
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Contacts</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-contacts
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+var myContact = navigator.contacts.create({
+  'displayName': 'Test User'
+});
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Device</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-device
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+device.cordova
+device.model
+device.platform
+device.uuid
+device.version
+device.manufacturer
+device.isVirtual
+device.serial
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>File</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-file
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+cordova.file
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+cdvfile://localhost/persistent/path/to/file
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>File Transfer</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-file-transfer
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+var options = new FileUploadOptions();
+options.fileKey = "file";
+options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+options.mimeType = "text/plain";
+
+var params = {};
+params.value1 = "test";
+params.value2 = "param";
+
+options.params = params;
+
+var ft = new FileTransfer();
+ft.upload(
+  fileURL, encodeURI("http://some.server.com/upload.php"),
+  onSuccess, onError, options
+);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Geolocation</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-geolocation
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+navigator.geolocation.getCurrentPosition
+navigator.geolocation.watchPosition
+navigator.geolocation.clearWatch
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Globalization</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-globalization
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+navigator.globalization.getPreferredLanguage
+navigator.globalization.getLocaleName
+navigator.globalization.dateToString
+navigator.globalization.stringToDate
+navigator.globalization.getDatePattern
+navigator.globalization.getDateNames
+navigator.globalization.isDayLightSavingsTime
+navigator.globalization.getFirstDayOfWeek
+navigator.globalization.numberToString
+navigator.globalization.stringToNumber
+navigator.globalization.getNumberPattern
+navigator.globalization.getCurrencyPattern
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>InApp Browser</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-inappbrowser
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+var ref = cordova.InAppBrowser.open(
+  'http://apache.org', '_blank', 'location=yes'
+);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Media</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-media
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+function playAudio(url) {
+    // Play the audio file at url
+    var my_media = new Media(url,
+        // success callback
+        function () {
+            console.log("playAudio():Audio Success");
+        },
+        // error callback
+        function (err) {
+            console.log("playAudio():Audio Error: " + err);
+        }
+    );
+    // Play audio
+    my_media.play();
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Notifications (Dialogs)</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-dialogs
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+navigator.notification.alert(
+    'You are the winner!',  // message
+    alertDismissed,         // callback
+    'Game Over',            // title
+    'Done'                  // buttonName
+);
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Splash</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-splashscreen
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+&lt;platform name="android"&gt;
+  &lt;!-- you can use any density that exists in the Android project --&gt;
+  &lt;splash
+    src="res/screen/android/splash-land-hdpi.png"
+    density="land-hdpi"
+  /&gt;
+  ...
+&lt;/platform&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>StatusBar</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-statusbar
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+StatusBar.overlaysWebView
+StatusBar.styleDefault
+StatusBar.styleLightContent
+StatusBar.styleBlackTranslucent
+StatusBar.styleBlackOpaque
+StatusBar.backgroundColorByName
+StatusBar.backgroundColorByHexString
+StatusBar.hide
+StatusBar.show
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Vibration</h3>
+
+    <pre><code class="javascript" data-trim>
+cordova plugin add cordova-plugin-vibration
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+// Vibrate for 3 seconds
+navigator.vibrate(3000);
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+// Vibrate for 1 second
+// Wait for 1 second
+// Vibrate for 3 seconds
+// Wait for 1 second
+// Vibrate for 5 seconds
+navigator.vibrate([1000, 1000, 3000, 1000, 5000]);
+    </code></pre>
+  </section>
+</section>
