@@ -1,0 +1,410 @@
+<section>
+  <h1>React</h1>
+  <h2>Лекція 14</h2>
+</section>
+
+<section>
+  <h2>Чому React?</h2>
+
+  <section>
+    <h3>Переваги</h3>
+
+    <ul>
+      <li>Швидкість</li>
+      <li>Універсальність</li>
+      <li>Інфраструктура</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Недоліки</h3>
+
+    <ul>
+      <li>Високий поріг входу</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Hello World</h2>
+
+  <section>
+    <h2>Встановлення генератора</h2>
+
+    <pre><code class="javascript" data-trim>
+$ npm install -g create-react-app
+    </code></pre>
+  </section>
+
+  <section>
+    <h2>Генерація нової аплікації</h2>
+
+    <pre><code class="javascript" data-trim>
+$ create-react-app myapp
+    </code></pre>
+  </section>
+
+  <section>
+    <h2>Запуск аплікації</h2>
+
+    <pre><code class="javascript" data-trim>
+cd myapp
+yarn start
+    </code></pre>
+  </section>
+
+  <section>
+    <img src="images/react-hello-world.png" />
+  </section>
+</section>
+
+<section>
+  <h2>yarn</h2>
+
+  <section>
+    <h3>Менеджер пакетів</h3>
+
+    <p>Альтернатива npm</p>
+  </section>
+
+  <section>
+    <h3>Інсталяція</h3>
+
+    <a href="https://yarnpkg.com/lang/en/docs/install/">https://yarnpkg.com/lang/en/docs/install/</a>
+  </section>
+
+  <section>
+    <h3>Встановлення пакетів</h3>
+
+    <pre><code class="javascript" data-trim>
+yarn
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Додавання пакета</h3>
+
+    <pre><code class="javascript" data-trim>
+yarn add package
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Запуск скрипта</h3>
+
+    <i>package.json</i>
+    <pre><code class="javascript" data-trim>
+"scripts": {
+  "run": "node app",
+}
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+yarn run
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Переваги</h3>
+
+    <ul>
+      <li>Зручний</li>
+      <li>Швидкий</li>
+      <li>Надійний</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>react-create-app</h2>
+
+  <section>
+    <h3>Нова аплікація</h3>
+
+    <pre><code class="javascript" data-trim>
+.
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   └── manifest.json
+├── README.md
+├── src
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   ├── logo.svg
+│   └── registerServiceWorker.js
+└── yarn.lock
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>package.json</h3>
+
+    <pre><code class="javascript" data-trim>
+{
+  "name": "react-example",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h1>889 пакетів</h1>
+  </section>
+
+  <section>
+    <h3>Скрипти</h3>
+
+    <ul>
+      <li><b>yarn start</b> - запуск аплікації в режимі розробки;</li>
+      <li><b>yarn build</b> - побудова аплікації для випуску;</li>
+      <li><b>yarn test</b> - запуск тестів аплікації;</li>
+      <li><b>yarn eject</b> - вивантаження конфігурації та видалення react-scripts.</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Компоненти</h2>
+
+  <section>
+    <h3>Імпорт</h3>
+
+    <pre><code class="javascript" data-trim>
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Клас компоненту</h3>
+
+    <pre><code class="javascript" data-trim>
+class App extends Component {
+  render() {
+    return (
+      ...
+    );
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>JSX</h3>
+
+    <pre><code class="javascript" data-trim>
+&lt;div className="App"&gt;
+  &lt;header className="App-header"&gt;
+    &lt;img src={logo} className="App-logo" alt="logo" /&gt;
+    &lt;h1 className="App-title"&gt;Welcome to React&lt;/h1&gt;
+  &lt;/header&gt;
+  &lt;p className="App-intro"&gt;
+    To get started, edit &lt;code&gt;src/App.js&lt;/code&gt; and save to reload.
+  &lt;/p&gt;
+&lt;/div&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Точка входу</h3>
+
+    <pre><code class="javascript" data-trim>
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById('root'));
+registerServiceWorker();
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Взаємодія компонентів</h2>
+
+  <section>
+    <h3>props</h3>
+
+    <pre><code class="javascript" data-trim>
+class Phone extends Component {
+  render() {
+    return &lt;div className="phone"&gt;{{this.props.number}}&lt;/div&gt;;
+  }
+}
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+class Contact extends Component {
+  render() {
+    return (
+      &lt;img src={this.props.contact.image} /&gt;
+      &lt;Phone number={this.props.contact.phone} /&gt;
+    );
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Stateless components</h3>
+
+    <pre><code class="javascript" data-trim>
+function Phone(props) {
+  return &lt;div className="phone"&gt;{{props.number}}&lt;/div&gt;;
+}
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+const Phone = ({ number }) =&gt;
+  &lt;div className="phone"&gt;{{number}}&lt;/div&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>children</h3>
+
+    <pre><code class="javascript" data-trim>
+class FieldList extends Component {
+  render() {
+    return (
+      <div class="field-list">
+        {this.props.children}
+      </div>
+    );
+  }
+}
+    </code></pre>
+
+    <pre><code class="javascript" data-trim>
+&lt;FieldList&gt;
+  &lt;Phone number={this.contact.phone} /&gt;
+&lt;/FieldList&gt;
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Контроль властивостей</h3>
+
+    <pre><code class="javascript" data-trim>
+Phone.propTypes = {
+  number: React.PropTypes.number.isRequired,
+  code: PropTypes.string
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Властивості за замовчуванням</h3>
+
+    <pre><code class="javascript" data-trim>
+Phone.defaultProps = {
+  code: '+380'
+};
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Компоненти зі станом</h2>
+
+  <section>
+    <h3>state</h3>
+
+    <pre><code class="javascript" data-trim>
+class Counter extends Component {
+  constructor() {
+    super();
+    this.state = { count: 0 };
+  }
+
+  increment = () =&gt; {
+    this.setState((prevState) =&gt; { count: prevState.count + 1 });
+  }
+
+  render() {
+    return (
+      &lt;button onClick={this.increment}&gt;{this.state.count}&lt;/button&gt;
+    );
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Методи життєвого циклу</h3>
+
+    <pre><code class="javascript" data-trim>
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: props.count };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(() =&gt; { counte: nextProps.count });
+  }
+
+  ...
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Монтування</h3>
+
+    <ul>
+      <li><b>constructor()</b> - Конструктор;</li>
+      <li><b>componentWillMount()</b> - Перед приєднанням компонента;</li>
+      <li><b>render()</b> - Відображення;</li>
+      <li><b>componentDidMount()</b> - Після приєднання компонентаю</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Оновлення</h3>
+
+    <ul>
+      <li><b>componentWillReceiveProps()</b> - Компонент має отримати властивості;</li>
+      <li><b>shouldComponentUpdate()</b> - Чи має компонент оновлюватись?</li>
+      <li><b>componentWillUpdate()</b> - Перед тим, як компонент оновиться;</li>
+      <li><b>render()</b> - Оновлення;</li>
+      <li><b>componentDidUpdate()</b> - Після оновлення.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Відмонтування</h3>
+
+    <ul>
+      <li><b>componentWillUnmount()</b> - Перед відмонтування компонента.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Обробка помилок</h3>
+
+    <ul>
+      <li><b>componentDidCatch()</b> - Якщо в дочірніх компонентах виникла помилка.</li>
+    </ul>
+  </section>
+</section>
