@@ -1,0 +1,501 @@
+<section>
+  <h1>Redux</h1>
+  <h2>Лекція 15</h2>
+</section>
+
+<section>
+  <h2>React</h2>
+
+  <section>
+    <h2>Це не каркас, це лише бібліотека для відображення</h2>
+  </section>
+
+  <section>
+    <h3>Потік даних</h3>
+
+    <ul>
+      <li>Компонент отримує набір незмінних аттрибутів (props)</li>
+      <li>Компонент передає аттрибути своїм нащадкам</li>
+      <li>Нащадки можуть взаємодіяти зі своїми предками виключно за допомогою зворотних викликів, що передані, як атрибути</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Потік даних</h2>
+
+    <figure>
+      <img src="images/react-data-flow.svg" />
+    </figure>
+  </section>
+
+  <section>
+    <strong>Демо: react</strong>
+  </section>
+
+  <section>
+    <h2>Недоліки</h2>
+
+    <ul>
+      <li>Тільки відображення</li>
+      <li>Потоки даних мають відповідати структурі компонентів</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h1>Flux</h1>
+
+  <section>
+    <h2>Історія</h2>
+
+    <p>Flux це архітектура, що Facebook використовує для побудови web-аплікацій. Віе доповнює React's за допомогою </strong>однонаправленого потоку даних</strong>.</p>
+    <p>Перший внесок <strong>Paul O’Shannessy</strong></p>
+  </section>
+
+  <section>
+    <h2>Mind-framework</h2>
+
+    <p>Це скоріше набор підходів, а не формальний каркас (framework).</p>
+  </section>
+
+  <section>
+    <h2>Архітектура (Відображення)</h2>
+
+    <strong>React</strong>
+  </section>
+
+  <section>
+    <h2>Архітектура (Диспетчер)</h2>
+
+    <p><strong>Диспетчер</strong> - єдиний центральний хаб що обслуговує всі потоки даних в Flux аплікації. Це реєстр зворотних викликів.</p>
+
+    <pre><code class="hljs" data-trim>
+import { Dispatcher } from 'flux'
+
+const AppDispatcher = new Dispatcher()
+
+export default AppDispatcher
+    </code></pre>
+  </section>
+
+  <section>
+    <h2>Архітектура (Сховище)</h2>
+
+    <p>Сховище це місце для даних аплікації ...</p>
+
+    <pre><code class="hljs" data-trim>
+import { EventEmitter } from 'events'
+
+let focusedPokemon = null
+
+const PokemonStore = Object.assign({}, EventEmitter.prototype, {
+  focused() {
+    return focusedPokemon
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Архітектура (Сховище)</h3>
+
+    <p>... та логіки.</p>
+
+    <pre><code class="hljs" data-trim>
+import AppDispatcher from '../dispatcher/AppDispatcher'
+
+const CHANGE_EVENT = 'change'
+
+AppDispatcher.register(function(action) {
+  switch(action.type) {
+    case FOCUS_POKEMON:
+      focusedPokemon = action.pokemon
+      PokemonStore.emit(CHANGE_EVENT)
+      break
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Генератори дії</h3>
+
+    <pre><code class="hljs" data-trim>
+import AppDispatcher from '../dispatcher/AppDispatcher'
+
+export const FOCUS_POKEMON = 'FOCUS_POKEMON'
+
+const PokemonActions = {
+  focus(pokemon) {
+    AppDispatcher.dispatch({
+      type: FOCUS_POKEMON,
+      pokemon
+    })
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h2>Схема архітектури Flux</h2>
+
+    <figure>
+      <img src="images/flux-architecture.png" />
+    </figure>
+  </section>
+
+  <section>
+    <h2>Однонаправлений потік даних</h2>
+
+    <img src="images/flux-data-flow.svg" />
+
+    <figure>
+      <figcaption>Глобальний та всередині компонентів</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <strong>Демо: flux</strong>
+  </section>
+
+  <section>
+    <h3>Недоліки</h3>
+
+    <ul>
+      <li>Необхідно самому розробляти сховище</li>
+      <li>Стан перегонів</li>
+      <li>Побічні ефекти</li>
+      <li>Погане розділення логіки і представлення</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h1>Redux</h1>
+</section>
+
+<section>
+  <h2>Історія</h2>
+
+  <p>Our code must manage more state than ever before, and don't lost control over the when, why, and how of its state</p>
+
+  <p>Створено <strong>Dan Abramov (@gaearon)</strong></p>
+</section>
+
+<section>
+  <h2>Засади</h2>
+
+  <section>
+    <h3>Єдине джерело істини</h3>
+
+    <p>Стан всієї аплікації зберігається в дереві об'єктів в єдиному сховищі.</p>
+  </section>
+
+  <section>
+    <h3>Стан тільки для читання</h3>
+
+    <p>Єдиний спосіб змінити стан, це опубліковати (emit) подію, що описує зміни.</p>
+  </section>
+
+  <section>
+    <h3>Зміни відбуваються за допомогою чистих функції</h3>
+
+    <p>Для того щоб описати, як стан буде змінюватись відповідно до дії, ви пишете чисті редюсери.</p>
+  </section>
+</section>
+
+<section>
+  <h2>Архітектура</h2>
+
+  <section>
+    <h3>Дії</h3>
+
+    <p>Схожі на дії Flux але не диспетчеризуються одразу</p>
+
+    <pre><code class="hljs" data-trim>
+export const FOCUS_POKEMON = 'FOCUS_POKEMON'
+
+export const focus = (pokemon) =&gt; {
+  return {
+    type: FOCUS_POKEMON,
+    pokemon
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Сховище (та Диспетчер)</h3>
+
+    <pre><code class="hljs" data-trim>
+import { createStore, compose } from 'redux'
+import rootReducer from './reducers/index'
+
+const store = createStore(rootReducer, INITIAL_STATE);
+
+export default store
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Редюсер (Reducer)</h3>
+
+    <pre><code class="hljs" data-trim>
+import { FOCUS_POKEMON } from '../actions/focus'
+
+export default function focus(state = [], action) {
+  switch (action.type) {
+    case FOCUS_POKEMON:
+      return action.pokemon
+    default:
+      return state
+  }
+}
+    </code></pre>
+
+    <pre><code class="hljs" data-trim>
+actions.reduce(reducer, initialState) #=&gt; currentState
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Керування станом</h2>
+
+  <section>
+    <pre><code class="hljs" data-trim>
+const state = {
+  focus: {
+    name: 'Pikachu',
+    image: 'http://example.com/pikachu.png',
+    location: { lat: 49.24, lng: 28.47 }
+  },
+  search: 'Bulb',
+  pokemons: [...]
+};
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Комбінація редюсерів</h3>
+
+    <pre><code class="hljs" data-trim>
+import { combineReducers } from 'redux'
+
+import pokemons from './pokemons'
+import focus from './focus'
+import search from './search'
+
+const rootReducer = combineReducers({
+  pokemons, focus, search
+})
+
+export default rootReducer
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Композиція редюсерів</h3>
+
+    <pre><code class="hljs" data-trim>
+export default function pokemons(state = [], action) {
+  switch (action.type) {
+    case UPDATE_POKEMON_OWNER:
+      return state.map(element =&gt; pokemon(element, action))
+    default:
+      return state
+  }
+}
+
+function pokemon(state, action) {
+  switch (action.type) {
+    case UPDATE_POKEMON_OWNER:
+      return { ...state, owner: action.owner }
+    default:
+      return state
+  }
+}
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Механіка</h2>
+
+  <section>
+    <h3>Контекст</h3>
+
+    <p>Avoid using context directly unless you really know what you are doing. Using a library that happens to rely on context internally is relatively safe. <i>Dan Abramov</i></p>
+  </section>
+
+  <section>
+    <h3>Provider</h3>
+
+    <pre><code class="hljs" data-trim>
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import store from './store'
+import App from './components/App'
+
+render(
+  &lt;Provider store={store}&gt;
+    &lt;App /&gt;
+  &lt;/Provider&gt;,
+  document.getElementById('root')
+)
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Контейнери чи Компоненти</h3>
+
+    <ul>
+      <li><strong>Контейнери</strong> займаються питанням, <i>як речі працюють</i>, а <strong>Компоненти</strong>, як <i>речі виглядають</i></li>
+      <li><strong>Контейнери</strong> часто <i>внутрішній мають стан</i>, а <strong>Компоненти</strong> в загальному випадку <i>не мають стану</i></li>
+      <li><strong>Контейнери</strong> <i>тісно пов'язані з логікою аплікації</i>, а <strong>Компоненти</strong> навпаки <i>мало пов'язані з логікою конкретно цієї аплікації</i></li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>З'єднання (connect)</h3>
+
+    <pre><code class="hljs" data-trim>
+import React from 'react'
+import { connect } from 'react-redux'
+
+const Search = ({ q, onChange }) =&gt; (<div>...</div>)
+
+const mapStateToProps = state =&gt; ({
+  q: state.search
+})
+
+const mapDispatchToProps = dispatch =&gt; ({
+  onChange(q) {
+    dispatch(search(q))
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Потік даних</h2>
+
+  <img src="images/redux-data-flow.svg" />
+
+  <figure>
+    <figcaption>Глобальний (та в ізольованих елементах керування)</figcaption>
+  </figure>
+</section>
+
+<section>
+  <strong>Демо: redux</strong>
+</section>
+
+<section>
+  <h2>Проміжне ПЗ (Middleware)</h2>
+
+  <section>
+    <p>Дозволяє оброблювати дії після диспетчеризації, до того, як води досягнуть редюсерів. (І також обробляти результат у зворотньому напрямку).</p>
+  </section>
+
+  <section>
+    <h3>Логування</h3>
+
+    <pre><code class="hljs" data-trim>
+export const logger = store =&gt; next =&gt; action =&gt; {
+  const result = next(action)
+  console.log(JSON.stringify(store.getState()))
+  return result
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Сериалізація стану аплікації</h3>
+
+    <pre><code class="hljs" data-trim>
+export const localStore = key =&gt; store =&gt; next =&gt; action =&gt; {
+  const result = next(action)
+  localStorage.setItem(key, JSON.stringify(store.getState()))
+  return result
+}
+
+export const localRestore = key =&gt; {
+  const stateString = localStorage.getItem(key)
+  if (stateString) {
+    return JSON.parse(stateString)
+  }
+}
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Побічні ефекти</h3>
+
+    <pre><code class="hljs" data-trim>
+const SET_POKEMONS = 'SET_POKEMONS';
+
+export function setPokemons(pokemons) {
+  return {
+    type: SET_POKEMONS,
+    pokemons
+  };
+}
+
+export function fetchPokemons() {
+  return dispatch =&gt; {
+    return fetch('/pokemons')
+      .then(response =&gt; response.json())
+      .then(pokemons =&gt; dispatch(setPokemons(pokemons)))
+  }
+}
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h3>Інструменти розробника</h3>
+
+  <strong>Демо</strong>
+</section>
+
+<section>
+  <strong>Демо: redux-time-machine</strong>
+</section>
+
+<section>
+  <h2>Інше</h2>
+
+  <section>
+    <h3>Гаряче перезавантаження (Hot reload)</h3>
+
+    <strong>store#replaceReducer(nextReducer)</strong>
+
+    <p>Можлива заміна редюсерів на льоту.</p>
+  </section>
+
+  <section>
+    <h3>Візуалізація на стороні сервера</h3>
+
+    <p>Можна передати не тільки розмітку, а й стан усієї аплікації в одному об'єкті. Також немає ніяких обмежень у використанні Redux на сервері.</p>
+  </section>
+
+  <section>
+    <h3>Тестування</h3>
+
+    <p>Редюсери чисті функції, тому тестування більшості логіки тривіальне.</p>
+  </section>
+</section>
+
+<section>
+  <h3>Недоліки</h3>
+
+  <ul>
+    <li>Крута крива складності</li>
+    <li>Доволі багато початкового коду</li>
+  </ul>
+</section>

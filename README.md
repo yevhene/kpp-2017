@@ -98,14 +98,18 @@
       - Apache Cordova
     - Матеріали:
       - [Слайди](https://vntu-kpp.herokuapp.com/slides/13-cordova)
-
---- Ми тут ---
-
 14. Односторінкові аплікації
   - Теми:
     - React
   - Матеріали:
     - [Слайди](https://vntu-kpp.herokuapp.com/slides/14-react)
 
-15. Брокер черг RabbitMQ
+--- Ми тут ---
+
+15. Управління потоками даних
+  - Теми:
+    - Redux
+  - Матеріали:
+    - [Слайди](https://vntu-kpp.herokuapp.com/slides/15-redux)
+
 16. Мікросервісна архітектура (docker)
