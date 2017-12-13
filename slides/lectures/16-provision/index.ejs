@@ -1,0 +1,312 @@
+<section>
+  <h1>Провізування</h1>
+  <h2>Лекція 16</h2>
+</section>
+
+<section>
+  <h2>Linux Processes</h2>
+
+  <section>
+    <h3>Системні виклики</h3>
+
+    <ul>
+      <li><b>fork</b> - Копіює поточний процес. Дочірні процеси мають спільні відкриті дескриптори файлів із батьківським процесом ті копію пам'яті;</li>
+      <li><b>exec</b> - Замінює поточний процес на інший.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Дескриптори</h3>
+
+    <ul>
+      <li><b>Файли</b></li>
+      <li><b>Пристрої</b></li>
+      <li><b>Стандартний ввід-вивід</b> - STDIN, STDOUT, STDERR;</li>
+      <li><b>Pipe</b> - Потоки для запису зчитування.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Концепції</h3>
+
+    <ul>
+      <li><b>init</b> - Перший процес;</li>
+      <li><b>zombie</b> - Процес що завершився але залишається, щоб бітьківський процес міг зчитати код завершення;</li>
+      <li><b>signal</b> - Спосіб комунікації процесів;</li>
+      <li><b>copy on write</b> - Пам'ять не копіюється, поки процес не намагається її змінити.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>kill</h3>
+
+    <pre><code class="hljs" data-trim>
+Signal     Value     Action   Comment
+──────────────────────────────────────────────────────────────────────
+SIGHUP        1       Term    Hangup detected on controlling terminal
+                              or death of controlling process
+SIGINT        2       Term    Interrupt from keyboard
+SIGQUIT       3       Core    Quit from keyboard
+SIGILL        4       Core    Illegal Instruction
+SIGABRT       6       Core    Abort signal from abort(3)
+SIGFPE        8       Core    Floating point exception
+SIGKILL       9       Term    Kill signal
+SIGSEGV      11       Core    Invalid memory reference
+SIGPIPE      13       Term    Broken pipe: write to pipe with no
+                              readers
+SIGALRM      14       Term    Timer signal from alarm(2)
+SIGTERM      15       Term    Termination signal
+SIGUSR1   30,10,16    Term    User-defined signal 1
+SIGUSR2   31,12,17    Term    User-defined signal 2
+SIGCHLD   20,17,18    Ign     Child stopped or terminated
+SIGCONT   19,18,25    Cont    Continue if stopped
+SIGSTOP   17,19,23    Stop    Stop process
+SIGTSTP   18,20,24    Stop    Stop typed at terminal
+SIGTTIN   21,21,26    Stop    Terminal input for background process
+SIGTTOU   22,22,27    Stop    Terminal output for background process
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Моніторинг</h3>
+
+    <ul>
+      <li><b>ps</b> - Список процесів;</li>
+      <li><b>pstree</b> - Дерево процесів;</li>
+      <li><b>pgrep</b> - Пошук в списку процесів.</li>
+      <li><b>top</b> - Моніторинг процесів;</li>
+      <li><b>htop</b> - Продвинутий моніторинг процесів;</li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Bash</h2>
+
+  <section>
+    <h3>Дивний але потужний</h3>
+  </section>
+</section>
+
+<section>
+  <h2>Інструменти Провізування</h2>
+
+  <section>
+    <ul>
+      <li><b>Chief</b></li>
+      <li><b>Puppet</b></li>
+      <li><b>Ansible</b></li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Системи керування віртуальними машинами</h2>
+
+  <section>
+    <ul>
+      <li><b>Vagrant</b></li>
+    </ul>
+  </section>
+</section>
+
+<section>
+  <h2>Docker</h2>
+
+  <section>
+    <h3>docker run</h3>
+
+    <pre><code class="hljs" data-trim>
+$ docker run -i -t ubuntu /bin/bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu43db9dbdcb30: Pul lcomplete
+2dc64e8f8d4f: Pull complete
+670a583e1b50: Pull complete
+183b0bfcd10e: Pull complete
+Digest: sha256:c6674c44c6439673bf56536c1a15916639c47ea04c3d6296c5df938add67b54b
+Status: Downloaded newer image for ubuntu:latest
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>docker ps</h3>
+
+    <pre><code class="hljs" data-trim>
+$ docker ps
+
+CONTAINER ID   IMAGE           COMMAND     CREATED         STATUS      PORTS  NAMES
+c3f279d17e0a    ubuntu:12.04    /bin/bash   7 days ago      Up 25 hours        desperate_dubinsky
+197387f1b436    ubuntu:12.04    /bin/bash   7 days ago      Up 25 hours        focused_hamilton
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>docker stop/start/restart</h3>
+
+    <pre><code class="hljs" data-trim>
+$ docker start aa3f365f0f4e
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>docker attach</h3>
+
+    <pre><code class="hljs" data-trim>
+$ docker attach aa3f365f0f4e
+root@aa3f365f0f4e:/#
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>docker commit</h3>
+
+    <pre><code class="hljs" data-trim>
+$ docker commit
+    </code></pre>
+  </section>
+
+  <section>
+    <img src="images/docker-layers.jpg">
+  </section>
+</section>
+
+<section>
+  <h2>Dockerfile</h2>
+
+  <section>
+    <h3>Базові інструкції</h3>
+
+    <ul>
+      <li><b>FROM</b> - вказує з якого образа буде починатись робота;</li>
+      <li><b>COPY</b> - зкопіювати файл у контейнер;</li>
+      <li><b>ADD</b> - додати файл у контейнер (трохи розумніша за COPY);</li>
+      <li><b>RUN</b> - виконати команду, додати новий шар;</li>
+      <li><b>CMD</b> - яку команду виконати під час запуску.</li>
+    </ul>
+
+    <pre><code class="hljs" data-trim>
+FROM ubuntu:15.04
+COPY . /app
+RUN make /app
+CMD python /app/app.py
+    </code></pre>
+
+    <pre><code class="hljs" data-trim>
+docker build .
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Описові інструкції</h3>
+
+    <ul>
+      <li><b>USER</b> - під яким користувачем ведеться робота;</li>
+      <li><b>WORKDIR</b> - робоча директорія контейнера;</li>
+      <li><b>SHELL</b> - яку оболонку використовувати;</li>
+      <li><b>ENV</b> - змінні оточення;</li>
+      <li><b>LABEL</b> - Будь яка мітка, ключ-значення.</li>
+    </ul>
+
+    <pre><code class="hljs" data-trim>
+USER web
+WORKDIR /app
+SHELL ["/bin/sh", "-c"]
+ENV NODE_ENV=production
+LABEL maintainer="yevhene@vntu.edu.ua"
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Взаємодія з зовнішнім світом</h3>
+
+    <ul>
+      <li><b>EXPOSE</b> - відкрити порт;</li>
+      <li><b>VOLUME</b> - приєднати директорію;</li>
+      <li><b>HEALTHCHECK</b> - команду що треба виконувати для перевірки роботи образа;</li>
+      <li><b>STOPSIGNAL</b> - Сигнал для завершення.</li>
+    </ul>
+
+    <pre><code class="hljs" data-trim>
+EXPOSE 5000:3000
+VOLUME /db
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+STOPSIGNAL SIGKILL
+    </code></pre>
+  </section>
+
+  <section>
+    <h3>Підготовка для розширення</h3>
+
+    <ul>
+      <li><b>ENTRYPOINT</b> - точка входу (працює в парі з CMD);</li>
+      <li><b>ONBUILD</b> - Виконається при побудові;</li>
+      <li><b>ARGS</b> - аргументи зо користувач може передати.</li>
+    </ul>
+
+    <pre><code class="hljs" data-trim>
+ENTRYPOINT ["top", "-b"]
+CMD ["-c"]
+
+ONBUILD RUN /usr/local/bin/python-build --dir /app/src
+
+ARG env
+RUN NODE_ENV=$env node app
+    </code></pre>
+
+    <pre><code class="hljs" data-trim>
+docker build --build-arg env=production .
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Docker Compose</h2>
+
+  <section>
+    <pre><code class="hljs" data-trim>
+version: "3.3"
+
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
+    networks:
+      - overlay
+    deploy:
+      mode: replicated
+      replicas: 2
+      endpoint_mode: vip
+
+  mysql:
+    image: mysql
+    volumes:
+       - db-data:/var/lib/mysql/data
+    networks:
+       - overlay
+    deploy:
+      mode: replicated
+      replicas: 2
+      endpoint_mode: dnsrr
+
+volumes:
+  db-data:
+
+networks:
+  overlay:
+    </code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Використання</h2>
+
+  <section>
+    <ul>
+      <li><b>cloud.docker.com</b> - хмарні сервіси;</li>
+      <li><b>kubernetes</b> - системи керування контейнерами;</li>
+      <li><b>CoreOS</b> - операційні системи пристосовані для роботи з контейнерами.</li>
+    </ul>
+  </section>
+</section>

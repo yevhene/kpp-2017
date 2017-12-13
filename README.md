@@ -103,13 +103,16 @@
     - React
   - Матеріали:
     - [Слайди](https://vntu-kpp.herokuapp.com/slides/14-react)
-
---- Ми тут ---
-
 15. Управління потоками даних
   - Теми:
     - Redux
   - Матеріали:
     - [Слайди](https://vntu-kpp.herokuapp.com/slides/15-redux)
-
-16. Мікросервісна архітектура (docker)
+16. Провізування
+  - Теми:
+    - Linux
+    - Provision (Chief/Puppet/Ansible)
+    - Docker
+    - Docker Compose
+  - Матеріали:
+    - [Слайди](https://vntu-kpp.herokuapp.com/slides/16-provision)
