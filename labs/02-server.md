@@ -25,7 +25,7 @@
 $ sudo apt install nodejs
 ```
 
-### Налаштування Proxy
+### Налаштування Proxy (тільки для роботи в межах ВНТУ)
 ```
 $ npm config set proxy http://proxy.lan:3128
 ```
