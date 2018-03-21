@@ -23,7 +23,7 @@
       - Браузерні технології (HTML, CSS)
       - JavaScript HTML5 API
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/02-browser)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/02-browser)
 3. API
     - Теми:
       - WWW
@@ -31,13 +31,13 @@
       - Стратегії автентификації (token, OAuth2)
       - Формати (CSV, XML, JSON)
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/03-api)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/03-api)
 4. Контроль версій
     - Теми:
       - Основи систем контролю версій (git)
       - Хмарні сервіси контролю версій (github)
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/04-git)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/04-git)
 5. Серверне оточення
     - Теми:
       - Основи node.js
@@ -47,12 +47,12 @@
       - REST
       - Хмарні інстурменти розробки
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/05-node)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/05-node)
 6. Інтеграція компонентів за допомогою бази даних
     - Теми:
       - Документо-орієнтована база даних MongoDB
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/06-db)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/06-db)
 7. Стандарт ECMAScript
     - Теми:
       - Сучасний стан
@@ -60,19 +60,19 @@
       - TC 39
       - Історія та розвиток
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/07-ecma)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/07-ecma)
 8. Виробнича середа для API та компонентів
     - Теми:
       - Розгортування (deploy)
       - Хмарні сервіси (heroku)
       - Менеджери компонентів (foreman, pm2)
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/08-production)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/08-production)
 9. Оточення для настільних аплікацій
     - Теми:
       - Electron
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/09-electron)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/09-electron)
 10. Тестування та стандарти якості
     - Теми:
       - Перевірка якості (eslint)
@@ -80,7 +80,7 @@
       - Неперервна інтеграція (Continuous Integration)
       - Документація
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/10-testing)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/10-testing)
 11. Асинхронність JavaScript
     - Теми:
       - callbacks
@@ -89,25 +89,25 @@
       - async
       - Фреймворк koa.js
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/11-async)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/11-async)
 12. Брокер повідомлень Redis
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/12-redis)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/12-redis)
 13. Оточення для мобільних аплікацій
     - Теми:
       - Apache Cordova
     - Матеріали:
-      - [Слайди](https://vntu-kpp.herokuapp.com/slides/13-cordova)
+      - [Слайди](https://kpp-2017.herokuapp.com/slides/13-cordova)
 14. Односторінкові аплікації
   - Теми:
     - React
   - Матеріали:
-    - [Слайди](https://vntu-kpp.herokuapp.com/slides/14-react)
+    - [Слайди](https://kpp-2017.herokuapp.com/slides/14-react)
 15. Управління потоками даних
   - Теми:
     - Redux
   - Матеріали:
-    - [Слайди](https://vntu-kpp.herokuapp.com/slides/15-redux)
+    - [Слайди](https://kpp-2017.herokuapp.com/slides/15-redux)
 16. Провізування
   - Теми:
     - Linux
@@ -115,4 +115,4 @@
     - Docker
     - Docker Compose
   - Матеріали:
-    - [Слайди](https://vntu-kpp.herokuapp.com/slides/16-provision)
+    - [Слайди](https://kpp-2017.herokuapp.com/slides/16-provision)
